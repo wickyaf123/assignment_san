@@ -108,11 +108,15 @@ _SECTION_RE = re.compile(r"section\s+(\d+)", re.IGNORECASE)
 _RULE_RE = re.compile(r"rule\s+(\d+)", re.IGNORECASE)
 
 
-def _extract_search_terms(query_text: str) -> str:
+def _extract_search_terms(query_text: str, fuzzy: bool = True) -> str:
     """Extract meaningful legal keywords from a natural language query for BM25.
 
     Pulls out section/rule references and non-stopword terms, then joins them
     into a Lucene-friendly query string that ranks better than raw sentences.
+
+    When *fuzzy* is True (default), appends Lucene's ``~`` operator to
+    alphabetic keywords (4+ chars) so that minor misspellings still match
+    indexed terms. Numbers and section/rule references are kept exact.
     """
     terms: list[str] = []
 
@@ -123,6 +127,10 @@ def _extract_search_terms(query_text: str) -> str:
 
     words = re.findall(r"[a-zA-Z]+", query_text.lower())
     keywords = [w for w in words if w not in _STOPWORDS and len(w) > 2]
+
+    if fuzzy:
+        keywords = [f"{w}~" if len(w) >= 4 else w for w in keywords]
+
     terms.extend(keywords)
 
     if not terms:

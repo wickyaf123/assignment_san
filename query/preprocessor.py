@@ -1,15 +1,121 @@
 """
 Query preprocessor for ViddhiAI query engine.
 
-Normalizes abbreviations and cleans user queries before classification
-and Cypher generation. This improves intent classification accuracy
-and helps the LLM generate better Cypher by expanding domain-specific
-abbreviations into their full legal terms.
+Normalizes abbreviations, corrects common spelling mistakes, and cleans
+user queries before classification and Cypher generation. Spelling
+correction uses Levenshtein distance against a domain-specific legal
+dictionary — no external dependency or LLM call required.
 """
 
 from __future__ import annotations
 
 import re
+
+# ---------------------------------------------------------------------------
+# Domain spell-correction — Levenshtein distance against legal term dictionary
+# ---------------------------------------------------------------------------
+
+_LEGAL_TERMS: frozenset[str] = frozenset({
+    # Classifier-critical (regex-matched for intent routing)
+    "amendment", "amended", "amending", "amendments",
+    "penalty", "penalties", "fine", "fines", "punishment", "punishable",
+    "imprisonment", "contravention", "compliance", "offence", "violation",
+    "liability", "liabilities", "liable",
+    "section", "subsection", "provision", "provisions", "chapter", "rule",
+    "reference", "referenced", "refers", "cross",
+    "substitute", "substituted", "substitution",
+    "insert", "inserted", "insertion",
+    "omit", "omitted", "modify", "modified", "modification",
+    "decriminalized", "revised", "revision", "altered", "alteration",
+    "notwithstanding",
+    # Graph property values (used in Cypher WHERE clauses)
+    "director", "directors", "managing", "independent", "nominee",
+    "company", "companies", "private", "public", "foreign", "government",
+    "listed", "small", "person",
+    "dividend", "dividends", "share", "shares", "debenture", "debentures",
+    "capital", "securities", "member", "members", "shareholder",
+    "accounts", "audit", "auditor", "auditors",
+    "resolution", "ordinary", "special",
+    "meeting", "annual", "extraordinary", "general",
+    "merger", "amalgamation", "winding",
+    "board", "committee", "registrar", "tribunal",
+    "corporate", "social", "responsibility",
+    "schedule", "form", "prescribed",
+    "definition", "definitions", "meaning",
+    "power", "powers", "duties", "duty",
+    "appointment", "removal", "resignation", "qualification",
+    "prospectus", "allotment", "transfer", "transmission",
+    "deposit", "deposits", "loan", "loans", "borrowing",
+    "charge", "charges", "registered", "registration",
+    "inspection", "inquiry", "investigation",
+    "oppression", "mismanagement",
+    "managerial", "personnel", "remuneration",
+    "valuation", "valuer",
+    "related", "party", "transactions",
+    "quorum", "voting", "proxy", "ballot",
+})
+
+_MIN_WORD_LENGTH = 4
+_MAX_EDIT_DISTANCE = 2
+
+
+def _levenshtein(s: str, t: str) -> int:
+    """Compute Levenshtein edit distance between two strings."""
+    if len(s) < len(t):
+        return _levenshtein(t, s)
+    if not t:
+        return len(s)
+
+    prev = list(range(len(t) + 1))
+    for i, sc in enumerate(s):
+        curr = [i + 1]
+        for j, tc in enumerate(t):
+            cost = 0 if sc == tc else 1
+            curr.append(min(curr[j] + 1, prev[j + 1] + 1, prev[j] + cost))
+        prev = curr
+    return prev[-1]
+
+
+def _correct_word(word: str) -> str:
+    """Correct a single word against the legal term dictionary.
+
+    Returns the original word if it's already correct, too short to safely
+    correct, or no close match exists within the edit distance threshold.
+    """
+    lower = word.lower()
+    if lower in _LEGAL_TERMS or len(lower) < _MIN_WORD_LENGTH:
+        return word
+
+    best_match: str | None = None
+    best_dist = _MAX_EDIT_DISTANCE + 1
+
+    for term in _LEGAL_TERMS:
+        if abs(len(term) - len(lower)) > _MAX_EDIT_DISTANCE:
+            continue
+        dist = _levenshtein(lower, term)
+        if dist < best_dist:
+            best_dist = dist
+            best_match = term
+
+    if best_match is None or best_dist > _MAX_EDIT_DISTANCE:
+        return word
+
+    # Preserve original casing style
+    if word[0].isupper():
+        return best_match.capitalize()
+    return best_match
+
+
+def _correct_spelling(text: str) -> str:
+    """Apply domain-aware spelling correction to all words in the text.
+
+    Skips numbers, short words, and words already in the dictionary.
+    Only corrects English alphabetic tokens.
+    """
+    def _replace(m: re.Match) -> str:
+        return _correct_word(m.group(0))
+
+    return re.sub(r"[a-zA-Z]+", _replace, text)
 
 # ---------------------------------------------------------------------------
 # Abbreviation map — pattern → replacement
@@ -115,21 +221,25 @@ _HINDI_QUESTION_WORDS: dict[str, str] = {
 
 
 def preprocess_query(query: str) -> str:
-    """Normalize abbreviations and clean the user query.
+    """Normalize abbreviations, fix spelling, and clean the user query.
 
-    Supports both English and Hindi queries. Hindi queries are translated
-    to English using a legal term dictionary so the LLM generates correct
-    Cypher against the English-language graph data.
+    Pipeline order: spell-correct → abbreviation expansion → Hindi translation.
+    Spelling correction runs first so that downstream regex patterns in the
+    classifier and abbreviation map match correctly.
 
     Args:
         query: Raw natural language question from the user.
 
     Returns:
-        Cleaned query with abbreviations expanded. Hindi queries include
-        an English translation appended in brackets.
+        Cleaned query with spelling corrected and abbreviations expanded.
+        Hindi queries include an English translation appended in brackets.
     """
     result = query.strip()
     lang = _detect_query_language(result)
+
+    # Spell-correct English tokens before any pattern matching
+    if lang == "en":
+        result = _correct_spelling(result)
 
     if lang in ("hi", "mixed"):
         english_version = result
@@ -151,6 +261,9 @@ def preprocess_query(query: str) -> str:
 
         english_version = re.sub(r"[\u0900-\u097F?।]+", "", english_version).strip()
         english_version = re.sub(r"\s+", " ", english_version).strip()
+
+        # Spell-correct the extracted English portion
+        english_version = _correct_spelling(english_version)
 
         for pattern, replacement in _ABBREVIATIONS:
             english_version = pattern.sub(replacement, english_version)
