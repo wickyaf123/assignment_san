@@ -79,10 +79,9 @@ def _apply_amendments(original_text: str, amendments: list[dict]) -> EffectiveSt
     Returns:
         EffectiveState with current_text after all transformations applied.
 
-    Note: Unknown amendment_types (e.g., DECRIMINALIZES) are logged and skipped
-    without error. This is intentional — the loader passes through all amendment
-    types from the source data, and the resolver only applies text transformations
-    for known types.
+    Note: DECRIMINALIZES is treated as a substitution (old criminal penalty text
+    replaced with new civil penalty text). Unknown amendment_types are logged and
+    skipped without error.
     """
     if not amendments:
         return EffectiveState(
@@ -101,13 +100,16 @@ def _apply_amendments(original_text: str, amendments: list[dict]) -> EffectiveSt
         old_text = amendment.get("old_text", "")
         new_text = amendment.get("new_text", "")
 
-        if amendment_type == "SUBSTITUTES":
+        if amendment_type in ("SUBSTITUTES", "DECRIMINALIZES"):
+            # DECRIMINALIZES is semantically a substitution: old criminal
+            # penalty text is replaced with new civil penalty text.
             if old_text and old_text in current_text:
                 current_text = current_text.replace(old_text, new_text)
             elif old_text:
                 logger.warning(
-                    "SUBSTITUTES old_text not found in current_text: "
+                    "%s old_text not found in current_text: "
                     "amendment=%s, old_text='%s...'",
+                    amendment_type,
                     amendment.get("amendment_uid"),
                     old_text[:50],
                 )

@@ -92,6 +92,17 @@ AMENDMENT_SECTION_RE = re.compile(
 SUBSTITUTION_RE = re.compile(r"shall\s+be\s+substituted", re.IGNORECASE)
 INSERTION_RE = re.compile(r"shall\s+be\s+inserted", re.IGNORECASE)
 OMISSION_RE = re.compile(r"shall\s+be\s+omitted", re.IGNORECASE)
+# Decriminalization: criminal penalty replaced with civil penalty / compoundable offence
+DECRIMINALIZATION_RE = re.compile(
+    r"(?:shall\s+be\s+liable\s+to\s+(?:a\s+)?penalty|"
+    r"compoundable|"
+    r"in\s+lieu\s+of\s+(?:fine|imprisonment|prosecution)|"
+    r"decriminal|"
+    r"civil\s+penalty|"
+    r"penalty\s+(?:not\s+exceeding|which\s+may\s+extend)|"
+    r"in\s+default\s+of\s+which\s+(?:a\s+)?penalty)",
+    re.IGNORECASE,
+)
 
 # Footnote detection — identifies editorial footnotes that look like section headings
 _FOOTNOTE_INDICATORS = re.compile(
@@ -613,13 +624,20 @@ def parse_amendment_act(
         if sec_match:
             target_section = f"section {sec_match.group(1)}"
 
-            # Classify amendment type from the same paragraph
-            if SUBSTITUTION_RE.search(content):
+            # Classify amendment type from the same paragraph.
+            # Check decriminalization BEFORE substitution because
+            # decriminalization entries often also contain "shall be
+            # substituted" — the more specific match must win.
+            if DECRIMINALIZATION_RE.search(content) and SUBSTITUTION_RE.search(content):
+                amendment_type = "DECRIMINALIZES"
+            elif SUBSTITUTION_RE.search(content):
                 amendment_type = "SUBSTITUTES"
             elif INSERTION_RE.search(content):
                 amendment_type = "INSERTS"
             elif OMISSION_RE.search(content):
                 amendment_type = "OMITS"
+            elif DECRIMINALIZATION_RE.search(content):
+                amendment_type = "DECRIMINALIZES"
             else:
                 # Could not classify — default to SUBSTITUTES as most common
                 amendment_type = "SUBSTITUTES"

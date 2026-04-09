@@ -78,8 +78,9 @@ Node types and properties:
 Relationship types:
 - Structural: HAS_CHAPTER, HAS_SECTION, HAS_SUBSECTION, HAS_CLAUSE, HAS_SUBCLAUSE, \
 HAS_PROVISO, HAS_EXPLANATION, HAS_DEFINITION, HAS_SCHEDULE, HAS_RULE, HAS_FORM
-- Amendment: SUBSTITUTES, INSERTS, OMITS \
-(from AmendmentAct to Section, with properties: effective_date DATE, new_text STRING, old_text STRING)
+- Amendment: SUBSTITUTES, INSERTS, OMITS, DECRIMINALIZES \
+(from AmendmentAct to Section, with properties: effective_date DATE, new_text STRING, old_text STRING) \
+DECRIMINALIZES is used when a criminal penalty is replaced with a civil penalty or compoundable offence
 - Cross-reference: REFERS_TO, SUBJECT_TO, NOTWITHSTANDING, PRESCRIBES_FOR, DERIVED_RULE \
 (these edges exist from Section, SubSection, Clause, Proviso, Explanation, Definition, Rule, and Form nodes to Section nodes)
 - Derived legislation: (Rule)-[:DERIVED_RULE]->(Section) links a rule to the section it is framed under
@@ -265,7 +266,7 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "question": "How was Section 135 amended?",
             "cypher": (
                 "MATCH (a:AmendmentAct)-[r]->(s:Section {number: 135}) "
-                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS'] "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
                 "RETURN s.uid, a.uid, a.title, type(r) AS amendment_type, r.new_text, r.old_text, r.effective_date "
                 "ORDER BY r.effective_date"
             ),
@@ -274,7 +275,7 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "question": "What changes were made to Section 149?",
             "cypher": (
                 "MATCH (a:AmendmentAct)-[r]->(s:Section {number: 149}) "
-                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS'] "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
                 "RETURN s.uid, a.uid, a.title, type(r) AS amendment_type, r.new_text, r.effective_date"
             ),
         },
@@ -305,7 +306,7 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "cypher": (
                 "MATCH (s:Section {number: 135}) "
                 "OPTIONAL MATCH (a:AmendmentAct)-[r]->(s) "
-                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS'] "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
                 "RETURN s.uid, s.title, s.text AS original_text, "
                 "collect({type: type(r), new_text: r.new_text, old_text: r.old_text}) AS amendments"
             ),
@@ -316,7 +317,7 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
                 "MATCH (s:Section {number: 149}) "
                 "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) "
                 "OPTIONAL MATCH (a:AmendmentAct)-[r]->(s) "
-                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS'] "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
                 "RETURN s.uid, s.title, s.text AS original_text, "
                 "collect(DISTINCT ss.text) AS subsections, "
                 "collect(DISTINCT {amendment: a.title, type: type(r), new_text: r.new_text, old_text: r.old_text, date: r.effective_date}) AS amendments"
@@ -326,7 +327,7 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "question": "Which sections have been amended and what are the amendment details?",
             "cypher": (
                 "MATCH (a:AmendmentAct)-[r]->(s:Section) "
-                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS'] "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
                 "RETURN s.uid, a.uid, s.number, s.title, a.title AS amendment_act, type(r) AS amendment_type, "
                 "r.new_text, r.old_text, r.effective_date "
                 "ORDER BY s.number LIMIT 25"
@@ -337,8 +338,26 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "cypher": (
                 "MATCH (a:Act {uid: 'act-companies-2013'})-[:HAS_CHAPTER]->(c:Chapter {number: 'VIII'})-[:HAS_SECTION]->(s:Section) "
                 "MATCH (am:AmendmentAct)-[r]->(s) "
-                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS'] "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
                 "RETURN s.uid, am.uid, s.number, s.title, type(r) AS amendment_type "
+                "ORDER BY s.number"
+            ),
+        },
+        {
+            "question": "What did the Corporate Laws Amendment Act 2026 change?",
+            "cypher": (
+                "MATCH (a:AmendmentAct {uid: 'amend-corporate-laws-2026'})-[r]->(s:Section) "
+                "WHERE type(r) IN ['SUBSTITUTES','INSERTS','OMITS','DECRIMINALIZES'] "
+                "RETURN s.uid, a.uid, a.title, s.number, s.title AS section_title, "
+                "type(r) AS amendment_type, r.new_text, r.old_text, r.effective_date "
+                "ORDER BY s.number LIMIT 25"
+            ),
+        },
+        {
+            "question": "Which sections were decriminalized by the Amendment Act?",
+            "cypher": (
+                "MATCH (a:AmendmentAct)-[r:DECRIMINALIZES]->(s:Section) "
+                "RETURN s.uid, a.uid, s.number, s.title, r.new_text, r.old_text, r.effective_date "
                 "ORDER BY s.number"
             ),
         },
@@ -441,10 +460,9 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
         {
             "question": "Which sections were decriminalized by the Amendment Act?",
             "cypher": (
-                "MATCH (s:Section) WHERE s.text CONTAINS 'decriminal' OR s.text CONTAINS 'compoundable' "
-                "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) WHERE ss.text CONTAINS 'decriminal' OR ss.text CONTAINS 'compoundable' "
-                "RETURN s.uid, s.number, s.title, collect(ss.text) AS relevant_subsections "
-                "ORDER BY s.number LIMIT 25"
+                "MATCH (a:AmendmentAct)-[r:DECRIMINALIZES]->(s:Section) "
+                "RETURN s.uid, a.uid, s.number, s.title, r.new_text, r.old_text, r.effective_date "
+                "ORDER BY s.number"
             ),
         },
         {

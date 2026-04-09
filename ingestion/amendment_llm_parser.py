@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 class AmendmentEntrySchema(BaseModel):
     target_section: str  # e.g., "section 135"
-    amendment_type: Literal["SUBSTITUTES", "INSERTS", "OMITS"]
+    amendment_type: Literal["SUBSTITUTES", "INSERTS", "OMITS", "DECRIMINALIZES"]
     new_text: str = ""
     removed_text: str = ""
     raw_text: str = ""
@@ -35,7 +35,9 @@ You are analyzing the Corporate Laws (Amendment) Act, 2026 of India.
 
 Extract ALL amendment entries from the following text. For each amendment:
 - target_section: The section number being amended (e.g., "section 135")
-- amendment_type: One of SUBSTITUTES, INSERTS, or OMITS
+- amendment_type: One of SUBSTITUTES, INSERTS, OMITS, or DECRIMINALIZES
+  Use DECRIMINALIZES when a criminal penalty (imprisonment/fine) is replaced \
+with a civil penalty, compoundable offence, or "penalty not exceeding" language.
 - new_text: The new text being inserted or substituted (if applicable)
 - removed_text: The text being removed or replaced (if applicable)
 - raw_text: The original amendment instruction text

@@ -201,14 +201,14 @@ class AmendmentEntry(BaseModel):
     Attributes:
         target_section: Identifier of the section being amended (e.g., "section 135").
         amendment_type: Classification of the amendment operation:
-            SUBSTITUTES | INSERTS | OMITS
+            SUBSTITUTES | INSERTS | OMITS | DECRIMINALIZES
         new_text: The replacement or inserted text (empty for OMITS).
         removed_text: The text being omitted or replaced (empty for INSERTS).
         raw_text: The full raw text of this amendment entry.
     """
 
     target_section: str
-    amendment_type: str  # SUBSTITUTES | INSERTS | OMITS
+    amendment_type: str  # SUBSTITUTES | INSERTS | OMITS | DECRIMINALIZES
     new_text: str = ""
     removed_text: str = ""
     raw_text: str

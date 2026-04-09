@@ -155,15 +155,16 @@ def count_amendment_nodes(amendment: AmendmentAct) -> ParseReport:
     total_entries = len(amendment.entries)
 
     # Coverage: classified entries (those with a recognised amendment_type)
+    _VALID_AMENDMENT_TYPES = {"SUBSTITUTES", "INSERTS", "OMITS", "DECRIMINALIZES"}
     classified = sum(
         1 for e in amendment.entries
-        if e.amendment_type in ("SUBSTITUTES", "INSERTS", "OMITS")
+        if e.amendment_type in _VALID_AMENDMENT_TYPES
     )
     coverage_pct = round(classified / total_entries * 100, 1) if total_entries > 0 else 0.0
 
     warnings: list[str] = []
     for entry in amendment.entries:
-        if entry.amendment_type not in ("SUBSTITUTES", "INSERTS", "OMITS"):
+        if entry.amendment_type not in _VALID_AMENDMENT_TYPES:
             warnings.append(
                 f"Unrecognised amendment_type {entry.amendment_type!r} "
                 f"for target {entry.target_section!r}"
