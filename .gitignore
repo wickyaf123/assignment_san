@@ -1,0 +1,29 @@
+# Python generated files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Data directories (large files, not for version control)
+data/raw/
+data/parsed/
+
+# Distribution / packaging
+dist/
+build/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment
+.env
+.env.*

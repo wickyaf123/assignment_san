@@ -1,0 +1,13 @@
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.*
+!.env.example
+data/raw/
+viddhi_ai_backend.egg-info/
+.git/
+tests/

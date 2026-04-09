@@ -1,0 +1,410 @@
+[
+  {
+    "id": "GQ-001",
+    "category": "current_state",
+    "question": "What are the CSR obligations under Section 135?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "net profit",
+    "expected_cypher_pattern": "Section.*135"
+  },
+  {
+    "id": "GQ-002",
+    "category": "current_state",
+    "question": "What is the minimum number of directors required under Section 149?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "director",
+    "expected_cypher_pattern": "Section.*149"
+  },
+  {
+    "id": "GQ-003",
+    "category": "current_state",
+    "question": "What are the provisions for registered office under Section 12?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "registered office",
+    "expected_cypher_pattern": "Section.*12"
+  },
+  {
+    "id": "GQ-004",
+    "category": "current_state",
+    "question": "What are the requirements for annual general meeting under Section 96?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "annual general meeting",
+    "expected_cypher_pattern": "Section.*96"
+  },
+  {
+    "id": "GQ-005",
+    "category": "current_state",
+    "question": "What does Section 2(68) define as a private company?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "private company",
+    "expected_cypher_pattern": "Section.*2"
+  },
+  {
+    "id": "GQ-006",
+    "category": "current_state",
+    "question": "What are the qualifications for an auditor under Section 141?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "auditor",
+    "expected_cypher_pattern": "Section.*141"
+  },
+  {
+    "id": "GQ-007",
+    "category": "current_state",
+    "question": "What is the procedure for winding up under Section 270?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "winding up",
+    "expected_cypher_pattern": "Section.*270"
+  },
+  {
+    "id": "GQ-008",
+    "category": "current_state",
+    "question": "What are the provisions for board meetings under Section 173?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "board meeting",
+    "expected_cypher_pattern": "Section.*173"
+  },
+  {
+    "id": "GQ-009",
+    "category": "current_state",
+    "question": "What is the definition of a related party under Section 2(76)?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "related party",
+    "expected_cypher_pattern": "Section.*2"
+  },
+  {
+    "id": "GQ-010",
+    "category": "current_state",
+    "question": "What are the provisions for removal of directors under Section 169?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "removal",
+    "expected_cypher_pattern": "Section.*169"
+  },
+  {
+    "id": "GQ-011",
+    "category": "amendment_history",
+    "question": "How was Section 135 amended by the Amendment Act?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "amend",
+    "expected_cypher_pattern": "AMENDED_BY|SUBSTITUTES"
+  },
+  {
+    "id": "GQ-012",
+    "category": "amendment_history",
+    "question": "What changes were made to Section 149 regarding independent directors?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "independent director",
+    "expected_cypher_pattern": "Section.*149"
+  },
+  {
+    "id": "GQ-013",
+    "category": "amendment_history",
+    "question": "Was Section 185 modified by any amendment?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "185",
+    "expected_cypher_pattern": "Section.*185"
+  },
+  {
+    "id": "GQ-014",
+    "category": "amendment_history",
+    "question": "What amendments were made to Chapter IX?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "amend",
+    "expected_cypher_pattern": "Chapter.*IX"
+  },
+  {
+    "id": "GQ-015",
+    "category": "amendment_history",
+    "question": "How was the definition of small company amended?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "small company",
+    "expected_cypher_pattern": "amend|Section.*2"
+  },
+  {
+    "id": "GQ-016",
+    "category": "amendment_history",
+    "question": "Were there any changes to provisions on related party transactions?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "related party",
+    "expected_cypher_pattern": "Section.*188|Section.*184"
+  },
+  {
+    "id": "GQ-017",
+    "category": "amendment_history",
+    "question": "What amendments affected Section 173 on board meetings?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "board meeting",
+    "expected_cypher_pattern": "Section.*173"
+  },
+  {
+    "id": "GQ-018",
+    "category": "amendment_history",
+    "question": "How was Section 96 on AGM amended?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "annual general meeting",
+    "expected_cypher_pattern": "Section.*96"
+  },
+  {
+    "id": "GQ-019",
+    "category": "amendment_history",
+    "question": "What changes were made to Section 12 on registered office?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "registered office",
+    "expected_cypher_pattern": "Section.*12"
+  },
+  {
+    "id": "GQ-020",
+    "category": "amendment_history",
+    "question": "Were any provisions of Chapter VII amended?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "amend",
+    "expected_cypher_pattern": "Chapter.*VII"
+  },
+  {
+    "id": "GQ-021",
+    "category": "cross_reference_traversal",
+    "question": "Which sections reference Section 135?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "135",
+    "expected_cypher_pattern": "REFERS_TO|Section.*135"
+  },
+  {
+    "id": "GQ-022",
+    "category": "cross_reference_traversal",
+    "question": "What sections are subject to Section 149?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "149",
+    "expected_cypher_pattern": "SUBJECT_TO|Section.*149"
+  },
+  {
+    "id": "GQ-023",
+    "category": "cross_reference_traversal",
+    "question": "Which provisions reference the definition of director?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "director",
+    "expected_cypher_pattern": "REFERS_TO|Definition"
+  },
+  {
+    "id": "GQ-024",
+    "category": "cross_reference_traversal",
+    "question": "What sections reference Section 185 on loans to directors?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "185",
+    "expected_cypher_pattern": "REFERS_TO|Section.*185"
+  },
+  {
+    "id": "GQ-025",
+    "category": "cross_reference_traversal",
+    "question": "Which sections are notwithstanding Section 96?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "96",
+    "expected_cypher_pattern": "NOTWITHSTANDING|Section.*96"
+  },
+  {
+    "id": "GQ-026",
+    "category": "cross_reference_traversal",
+    "question": "What cross-references exist for Section 188?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "188",
+    "expected_cypher_pattern": "REFERS_TO|Section.*188"
+  },
+  {
+    "id": "GQ-027",
+    "category": "cross_reference_traversal",
+    "question": "Which rules reference Section 135?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "135",
+    "expected_cypher_pattern": "REFERS_TO|Rule"
+  },
+  {
+    "id": "GQ-028",
+    "category": "cross_reference_traversal",
+    "question": "What provisions reference the Companies Act schedules?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "schedule",
+    "expected_cypher_pattern": "REFERS_TO|Schedule"
+  },
+  {
+    "id": "GQ-029",
+    "category": "cross_reference_traversal",
+    "question": "Which sections reference Section 2 definitions?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "definition",
+    "expected_cypher_pattern": "REFERS_TO|Section.*2"
+  },
+  {
+    "id": "GQ-030",
+    "category": "cross_reference_traversal",
+    "question": "What cross-references exist for Chapter IX provisions?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "Chapter IX",
+    "expected_cypher_pattern": "REFERS_TO"
+  },
+  {
+    "id": "GQ-031",
+    "category": "penalty_query",
+    "question": "What is the penalty for non-compliance with Section 135?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "penalty",
+    "expected_cypher_pattern": "Section.*135"
+  },
+  {
+    "id": "GQ-032",
+    "category": "penalty_query",
+    "question": "What are the penalties under Section 185 for loans to directors?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "penalty",
+    "expected_cypher_pattern": "Section.*185"
+  },
+  {
+    "id": "GQ-033",
+    "category": "penalty_query",
+    "question": "What is the fine for failure to hold AGM under Section 99?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "fine",
+    "expected_cypher_pattern": "Section.*99"
+  },
+  {
+    "id": "GQ-034",
+    "category": "penalty_query",
+    "question": "What penalties apply for non-compliance with Section 149?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "penalty",
+    "expected_cypher_pattern": "Section.*149"
+  },
+  {
+    "id": "GQ-035",
+    "category": "penalty_query",
+    "question": "What is the punishment under Section 447 for fraud?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "fraud",
+    "expected_cypher_pattern": "Section.*447"
+  },
+  {
+    "id": "GQ-036",
+    "category": "penalty_query",
+    "question": "What penalties apply for Section 188 violations?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "penalty",
+    "expected_cypher_pattern": "Section.*188"
+  },
+  {
+    "id": "GQ-037",
+    "category": "penalty_query",
+    "question": "What is the fine for not maintaining registered office?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "fine",
+    "expected_cypher_pattern": "Section.*12"
+  },
+  {
+    "id": "GQ-038",
+    "category": "penalty_query",
+    "question": "What penalties apply under Section 173 for board meeting violations?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "penalty",
+    "expected_cypher_pattern": "Section.*173"
+  },
+  {
+    "id": "GQ-039",
+    "category": "penalty_query",
+    "question": "What are the penalties for false statements under Section 448?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "false statement",
+    "expected_cypher_pattern": "Section.*448"
+  },
+  {
+    "id": "GQ-040",
+    "category": "penalty_query",
+    "question": "What punishment applies for contravention of Section 185?",
+    "expected_intent": "penalty_query",
+    "expected_answer_contains": "punishment",
+    "expected_cypher_pattern": "Section.*185"
+  },
+  {
+    "id": "GQ-041",
+    "category": "edge_cases",
+    "question": "What is Section 1?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "short title",
+    "expected_cypher_pattern": "Section.*1"
+  },
+  {
+    "id": "GQ-042",
+    "category": "edge_cases",
+    "question": "Tell me about a section that does not exist: Section 999",
+    "expected_intent": "general_info",
+    "expected_answer_contains": "",
+    "expected_cypher_pattern": ""
+  },
+  {
+    "id": "GQ-043",
+    "category": "edge_cases",
+    "question": "What are the provisions of the Companies Act?",
+    "expected_intent": "general_info",
+    "expected_answer_contains": "compan",
+    "expected_cypher_pattern": "Act"
+  },
+  {
+    "id": "GQ-044",
+    "category": "edge_cases",
+    "question": "What is the penalty?",
+    "expected_intent": "general_info",
+    "expected_answer_contains": "",
+    "expected_cypher_pattern": ""
+  },
+  {
+    "id": "GQ-045",
+    "category": "edge_cases",
+    "question": "Section 135",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "135",
+    "expected_cypher_pattern": "Section.*135"
+  },
+  {
+    "id": "GQ-046",
+    "category": "edge_cases",
+    "question": "What rules relate to Section 135?",
+    "expected_intent": "cross_reference",
+    "expected_answer_contains": "rule",
+    "expected_cypher_pattern": "Rule|Section.*135"
+  },
+  {
+    "id": "GQ-047",
+    "category": "edge_cases",
+    "question": "Explain the CSR provisions and their amendments",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "CSR",
+    "expected_cypher_pattern": "Section.*135"
+  },
+  {
+    "id": "GQ-048",
+    "category": "edge_cases",
+    "question": "What is the current text of an omitted section?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "",
+    "expected_cypher_pattern": "Section"
+  },
+  {
+    "id": "GQ-049",
+    "category": "edge_cases",
+    "question": "How many chapters are in the Companies Act?",
+    "expected_intent": "general_info",
+    "expected_answer_contains": "chapter",
+    "expected_cypher_pattern": "Chapter"
+  },
+  {
+    "id": "GQ-050",
+    "category": "edge_cases",
+    "question": "What are all the definitions in Section 2?",
+    "expected_intent": "structured_lookup",
+    "expected_answer_contains": "definition",
+    "expected_cypher_pattern": "Section.*2|Definition"
+  },
+  {
+    "id": "GQ-051",
+    "category": "edge_cases",
+    "question": "Which sections were substituted by the amendment act?",
+    "expected_intent": "amendment_query",
+    "expected_answer_contains": "substitut",
+    "expected_cypher_pattern": "SUBSTITUTES"
+  }
+]
