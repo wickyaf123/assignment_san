@@ -77,10 +77,23 @@ def _format_results(records: list[dict]) -> str:
         record_parts = [f"Record {i}:"]
         for key, value in record.items():
             if value is not None:
-                # Truncate very long text fields to 500 chars
-                val_str = str(value)
-                if len(val_str) > 500:
-                    val_str = val_str[:500] + "..."
+                # For list values (e.g. collect()), format each element separately
+                if isinstance(value, list):
+                    items = []
+                    for item in value:
+                        item_str = str(item)
+                        if len(item_str) > 800:
+                            item_str = item_str[:800] + "..."
+                        items.append(item_str)
+                    val_str = "\n    - ".join(items)
+                    if items:
+                        val_str = "\n    - " + val_str
+                    else:
+                        val_str = "(empty list)"
+                else:
+                    val_str = str(value)
+                    if len(val_str) > 800:
+                        val_str = val_str[:800] + "..."
                 record_parts.append(f"  {key}: {val_str}")
         parts.append("\n".join(record_parts))
 
