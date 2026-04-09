@@ -61,10 +61,29 @@ ALLOWED_REF_TYPES: frozenset[str] = frozenset({
 # The $ anchor ensures trailing content (e.g., "section 149A") does not match.
 _SECTION_TARGET_RE = re.compile(r"section\s+(\d+)$", re.IGNORECASE)
 
-# Pattern to extract "under section N" or "in pursuance of section N" from Rule text/title
+# Pattern to extract section references from Rule text/title for DERIVED_RULE linking
 _DERIVED_RULE_RE = re.compile(
-    r"(?:under|in\s+pursuance\s+of|pursuant\s+to)\s+section\s+(\d+)", re.IGNORECASE
+    r"(?:under|in\s+pursuance\s+of|pursuant\s+to|for\s+the\s+purposes\s+of"
+    r"|in\s+relation\s+to|in\s+respect\s+of|as\s+required\s+(?:by|under)"
+    r"|read\s+with)\s+section\s+(\d+)",
+    re.IGNORECASE,
 )
+
+# Manual mapping for high-value Rule→Section associations that are well-known
+# but may not be captured by regex (e.g., the rule text doesn't explicitly say
+# "under section N" using the exact phrasing).
+MANUAL_RULE_SECTION_MAP: dict[str, list[str]] = {
+    "rule-8": ["sec-135"],    # CSR Rules → Section 135
+    "rule-9": ["sec-96"],     # AGM provisions
+    "rule-4": ["sec-73"],     # Acceptance of deposits
+    "rule-5": ["sec-177"],    # Audit committee
+    "rule-6": ["sec-178"],    # Nomination and remuneration committee
+    "rule-3": ["sec-149"],    # Appointment of independent directors
+    "rule-10": ["sec-185"],   # Loans to directors
+    "rule-11": ["sec-186"],   # Loans and investments by company
+    "rule-12": ["sec-188"],   # Related party transactions
+    "rule-7": ["sec-134"],    # Board's report
+}
 
 # Additional detection patterns for GRAPH-04 partial coverage.
 # Each tuple: (compiled_pattern, ref_type_string)
@@ -432,6 +451,14 @@ def link_derived_rules(driver: neo4j.Driver, ruleset: RuleSet) -> dict[str, int]
                     seen.add(key)
                     edges.append({"source_uid": rule.uid, "target_uid": target_uid})
                 break  # Use first match only (primary section reference)
+
+        # Apply manual mapping for known Rule→Section associations
+        if rule.uid in MANUAL_RULE_SECTION_MAP:
+            for target in MANUAL_RULE_SECTION_MAP[rule.uid]:
+                key = (rule.uid, target)
+                if key not in seen:
+                    seen.add(key)
+                    edges.append({"source_uid": rule.uid, "target_uid": target})
 
     logger.info(
         "link_derived_rules: %d edges collected from %d rules",

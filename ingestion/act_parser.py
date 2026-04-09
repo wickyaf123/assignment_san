@@ -74,8 +74,8 @@ SUBCLAUSE_RE = re.compile(r"^\(([ivxlc]+)\)\s+")
 PROVISO_RE = re.compile(r"^Provided\s+(also\s+|further\s+)?that\b", re.IGNORECASE)
 EXPLANATION_RE = re.compile(r"^Explanation(\s+[IVX]+)?[\.\-\u2014]\s*", re.IGNORECASE)
 DEFINITION_TERM_RE = re.compile(
-    r'^(?:\(\d+\)\s*)?["\u201c\u2018]([^"\u201d\u2019]+)["\u201d\u2019]\s+'
-    r"(?:means|shall\s+mean|includes|shall\s+include)\b",
+    r'^(?:\(\d+\)\s*)?["\u201c\u2018\']([^"\u201d\u2019\']+)["\u201d\u2019\']\s+'
+    r"(?:means(?:\s+and\s+includes)?|shall\s+mean|includes|shall\s+include)\b",
     re.IGNORECASE,
 )
 

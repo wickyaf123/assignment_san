@@ -194,6 +194,7 @@ def synthesize_node(state: QueryState) -> dict:
         state.get("sources", []),
         state.get("effective_state"),
         fallback_used=state.get("fallback_used", False),
+        intent=state.get("intent", ""),
     )
     logger.info("Synthesized answer (%d chars, %d citations)", len(answer), len(citations))
     return {"answer": answer, "citations": citations}
@@ -531,6 +532,7 @@ async def run_query_stream(question: str):
             state.get("sources", []),
             state.get("effective_state"),
             fallback_used=state.get("fallback_used", False),
+            intent=state.get("intent", ""),
         ):
             full_answer += chunk
             yield {"event": "token", "data": {"text": chunk}}

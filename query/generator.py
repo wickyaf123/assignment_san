@@ -103,6 +103,28 @@ def _clean_cypher(raw: str) -> str:
     return cleaned.strip()
 
 
+def _ensure_limit(cypher: str, default: int = 25) -> str:
+    """Append a LIMIT clause if the Cypher query doesn't already have one.
+
+    Skips injection for aggregation queries (count, sum, avg, collect, min, max)
+    since LIMIT on aggregated results is semantically different.
+
+    Args:
+        cypher: Cleaned Cypher query string.
+        default: Default LIMIT value to append.
+
+    Returns:
+        Cypher string with LIMIT guaranteed (unless it's an aggregation query).
+    """
+    upper = cypher.upper()
+    if "LIMIT" in upper:
+        return cypher
+    # Don't inject LIMIT on aggregation queries
+    if re.search(r"\b(?:COUNT|SUM|AVG|COLLECT|MIN|MAX)\s*\(", upper):
+        return cypher
+    return cypher.rstrip().rstrip(";") + f" LIMIT {default}"
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
@@ -168,6 +190,7 @@ def generate_cypher(
     raw_cypher = response.content
 
     cleaned = _clean_cypher(raw_cypher)
+    cleaned = _ensure_limit(cleaned)
     logger.info(
         "Generated Cypher for intent '%s': %s",
         intent,

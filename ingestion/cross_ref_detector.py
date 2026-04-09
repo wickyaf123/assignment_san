@@ -24,6 +24,7 @@ from ingestion.models import CrossReference
 # Patterns are applied in order; all matches are returned (no early exit).
 
 CROSS_REF_PATTERNS: list[tuple[re.Pattern[str], str]] = [
+    # --- SUBJECT_TO patterns ---
     (
         re.compile(
             r"subject\s+to\s+(?:the\s+provisions\s+of\s+)?section\s+(\d[\d\w]*)",
@@ -31,6 +32,7 @@ CROSS_REF_PATTERNS: list[tuple[re.Pattern[str], str]] = [
         ),
         "SUBJECT_TO",
     ),
+    # --- NOTWITHSTANDING patterns ---
     (
         re.compile(
             r"notwithstanding\s+(?:anything\s+(?:contained\s+)?in\s+)?section\s+(\d[\d\w]*)",
@@ -38,6 +40,21 @@ CROSS_REF_PATTERNS: list[tuple[re.Pattern[str], str]] = [
         ),
         "NOTWITHSTANDING",
     ),
+    (
+        re.compile(
+            r"save\s+as\s+(?:otherwise\s+)?provided\s+in\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "NOTWITHSTANDING",
+    ),
+    (
+        re.compile(
+            r"except\s+(?:as\s+provided\s+in\s+)?section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "NOTWITHSTANDING",
+    ),
+    # --- REFERS_TO patterns (specific phrasings first, then broader) ---
     (
         re.compile(
             r"(?:as\s+)?(?:referred\s+to|mentioned|specified)\s+in\s+section\s+(\d[\d\w]*)",
@@ -55,6 +72,62 @@ CROSS_REF_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (
         re.compile(
             r"in\s+accordance\s+with\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"as\s+provided\s+in\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"in\s+terms\s+of\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"read\s+with\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"for\s+the\s+purposes\s+of\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"in\s+relation\s+to\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"as\s+required\s+(?:by|under)\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"within\s+the\s+meaning\s+of\s+section\s+(\d[\d\w]*)",
+            re.IGNORECASE,
+        ),
+        "REFERS_TO",
+    ),
+    (
+        re.compile(
+            r"section\s+(\d[\d\w]*)\s+shall\s+(?:mutatis\s+mutandis\s+)?apply",
             re.IGNORECASE,
         ),
         "REFERS_TO",

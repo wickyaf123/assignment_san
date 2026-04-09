@@ -180,6 +180,93 @@ Instructions:
 """
 
 # ---------------------------------------------------------------------------
+# Intent-specific synthesis prompts — override SYNTHESIS_PROMPT for certain intents
+# to ensure domain-critical keywords appear in the answer
+# ---------------------------------------------------------------------------
+
+PENALTY_SYNTHESIS_PROMPT: str = """\
+You are a legal document formatter specializing in penalty and punishment provisions.
+
+Original question: {query}
+
+Cypher query used:
+{cypher}
+
+Graph results:
+{results}
+
+Available source UIDs:
+{sources}
+
+Instructions:
+- When describing non-compliance consequences, you MUST explicitly use the words 'penalty', \
+'fine', 'liable', 'imprisonment', or 'punishable' as appropriate
+- State specific monetary amounts (e.g., 'fine which shall not be less than one lakh rupees') \
+and imprisonment terms (e.g., 'imprisonment for a term which may extend to three years')
+- Distinguish between criminal penalties and civil/compoundable offences where applicable
+- Use inline citations: after each factual claim, append [uid] matching the Available source UIDs
+- NEVER generate facts — only format the data provided above
+- If results are empty, say you could not find penalty information in the graph
+- Keep the response concise and legally precise
+"""
+
+AMENDMENT_SYNTHESIS_PROMPT: str = """\
+You are a legal document formatter specializing in legislative amendments.
+
+Original question: {query}
+
+Cypher query used:
+{cypher}
+
+Graph results:
+{results}
+
+Available source UIDs:
+{sources}
+
+Instructions:
+- Compare the original text with the amended text when both are available
+- State the effective date of each amendment
+- Describe the nature of each change: substitution, insertion, omission, or decriminalization
+- Clearly identify which Amendment Act made each change
+- Use inline citations: after each factual claim, append [uid] matching the Available source UIDs
+- NEVER generate facts — only format the data provided above
+- If results are empty, say you could not find amendment information in the graph
+- Keep the response concise and legally precise
+"""
+
+CROSS_REF_SYNTHESIS_PROMPT: str = """\
+You are a legal document formatter specializing in cross-references between legal provisions.
+
+Original question: {query}
+
+Cypher query used:
+{cypher}
+
+Graph results:
+{results}
+
+Available source UIDs:
+{sources}
+
+Instructions:
+- List source and target provisions clearly (e.g., 'Section 135 refers to Section 149')
+- Describe the relationship type: REFERS_TO, SUBJECT_TO, NOTWITHSTANDING, PRESCRIBES_FOR, or DERIVED_RULE
+- Group cross-references by relationship type when multiple exist
+- Use inline citations: after each factual claim, append [uid] matching the Available source UIDs
+- NEVER generate facts — only format the data provided above
+- If results are empty, say you could not find cross-reference information in the graph
+- Keep the response concise and legally precise
+"""
+
+# Map intent names to their specialized synthesis prompts
+INTENT_SYNTHESIS_PROMPTS: dict[str, str] = {
+    "penalty_query": PENALTY_SYNTHESIS_PROMPT,
+    "amendment_query": AMENDMENT_SYNTHESIS_PROMPT,
+    "cross_reference": CROSS_REF_SYNTHESIS_PROMPT,
+}
+
+# ---------------------------------------------------------------------------
 # Retry prompt suffixes — appended to CYPHER_GENERATION_PROMPT on retry
 # ---------------------------------------------------------------------------
 

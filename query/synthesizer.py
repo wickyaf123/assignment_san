@@ -21,7 +21,12 @@ import re
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-from query.prompts import FALLBACK_SYNTHESIS_PROMPT, SYNTHESIS_PROMPT, SYSTEM_PROMPT
+from query.prompts import (
+    FALLBACK_SYNTHESIS_PROMPT,
+    INTENT_SYNTHESIS_PROMPTS,
+    SYNTHESIS_PROMPT,
+    SYSTEM_PROMPT,
+)
 
 # ---------------------------------------------------------------------------
 # Module-level logger
@@ -112,6 +117,7 @@ def synthesize_response(
     sources: list[dict],
     effective_state: dict | None = None,
     fallback_used: bool = False,
+    intent: str = "",
 ) -> tuple[str, list[dict]]:
     """Format graph query results into traceable prose for the user.
 
@@ -125,6 +131,7 @@ def synthesize_response(
         sources: Extracted source node excerpts (for traceability).
         effective_state: Optional effective state resolution dict (amendment chain).
         fallback_used: Whether BM25 fulltext fallback was used instead of Cypher.
+        intent: Query intent category (used to select specialized synthesis prompt).
 
     Returns:
         Tuple of (prose answer string with inline citations, citations list).
@@ -153,7 +160,7 @@ def synthesize_response(
             state_parts.append(f"  Amendment chain ({len(chain)} entries): {chain}")
         results_text += "\n".join(state_parts)
 
-    # Use fallback prompt for BM25 results, standard prompt for Cypher results
+    # Use fallback prompt for BM25 results, intent-specific or standard prompt for Cypher results
     if fallback_used:
         prompt = FALLBACK_SYNTHESIS_PROMPT.format(
             query=query,
@@ -161,7 +168,9 @@ def synthesize_response(
             sources=sources_text,
         )
     else:
-        prompt = SYNTHESIS_PROMPT.format(
+        # Select intent-specific prompt if available, else default
+        synthesis_template = INTENT_SYNTHESIS_PROMPTS.get(intent, SYNTHESIS_PROMPT)
+        prompt = synthesis_template.format(
             query=query,
             results=results_text,
             cypher=cypher,
@@ -234,6 +243,7 @@ async def synthesize_response_stream(
     sources: list[dict],
     effective_state: dict | None = None,
     fallback_used: bool = False,
+    intent: str = "",
 ):
     """Async generator that yields answer token chunks from Gemini streaming.
 
@@ -250,6 +260,7 @@ async def synthesize_response_stream(
         sources: Extracted source node excerpts (for traceability).
         effective_state: Optional effective state resolution dict (amendment chain).
         fallback_used: Whether BM25 fulltext fallback was used instead of Cypher.
+        intent: Query intent category (used to select specialized synthesis prompt).
 
     Yields:
         String chunks of the synthesised prose answer.
@@ -278,7 +289,7 @@ async def synthesize_response_stream(
             state_parts.append(f"  Amendment chain ({len(chain)} entries): {chain}")
         results_text += "\n".join(state_parts)
 
-    # Use fallback prompt for BM25 results, standard prompt for Cypher results
+    # Use fallback prompt for BM25 results, intent-specific or standard prompt for Cypher results
     if fallback_used:
         prompt = FALLBACK_SYNTHESIS_PROMPT.format(
             query=query,
@@ -286,7 +297,8 @@ async def synthesize_response_stream(
             sources=sources_text,
         )
     else:
-        prompt = SYNTHESIS_PROMPT.format(
+        synthesis_template = INTENT_SYNTHESIS_PROMPTS.get(intent, SYNTHESIS_PROMPT)
+        prompt = synthesis_template.format(
             query=query,
             results=results_text,
             cypher=cypher,
