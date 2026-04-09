@@ -537,6 +537,33 @@ def parse_companies_act(
             # 8. Continuation / unrecognized paragraph
             _append_to_current(content, page)
 
+    # Post-processing: merge UNKNOWN chapter into the first real chapter.
+    # The Companies Act has preliminary sections (1, 2) before the CHAPTER I
+    # heading. OpenDataLoader may emit them before the heading, causing a
+    # synthetic "UNKNOWN" chapter.  Merge its sections into Chapter I (or the
+    # first real chapter) so the graph never contains "Chapter UNKNOWN".
+    unknown_ch = next((ch for ch in act.chapters if ch.number == "UNKNOWN"), None)
+    if unknown_ch is not None:
+        real_chapters = [ch for ch in act.chapters if ch.number != "UNKNOWN"]
+        if real_chapters:
+            target = real_chapters[0]
+            target.sections = unknown_ch.sections + target.sections
+            act.chapters.remove(unknown_ch)
+            if target.number in chapters_by_number:
+                chapters_by_number[target.number] = target
+            logger.info(
+                "Merged %d orphan section(s) from Chapter UNKNOWN into Chapter %s",
+                len(unknown_ch.sections),
+                target.number,
+            )
+        else:
+            unknown_ch.number = "I"
+            unknown_ch.title = "PRELIMINARY"
+            chapters_by_number["I"] = unknown_ch
+            logger.info(
+                "No real chapters found — renamed Chapter UNKNOWN to Chapter I PRELIMINARY"
+            )
+
     if warnings:
         logger.debug("parse_companies_act produced %d warnings", len(warnings))
         for w in warnings[:20]:  # log first 20 to avoid log spam
