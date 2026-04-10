@@ -75,18 +75,18 @@ class TestHindiContentSkipped:
         assert "कंपनी" not in rule_text
         assert "These rules" in rule_text
 
-    def test_hindi_warning_logged(self, caplog):
+    def test_hindi_skip_logged(self, caplog):
         elements = [
             make_element("paragraph", "कंपनी अधिनियम"),
         ]
-        with caplog.at_level(logging.WARNING, logger="ingestion.rules_parser"):
+        with caplog.at_level(logging.DEBUG, logger="ingestion.rules_parser"):
             parse_companies_rules(iter(elements), source_pdf="test.pdf")
 
-        # A warning should mention Devanagari
+        # A debug message should indicate skipping Hindi content
         assert any(
-            "Devanagari" in record.message
+            "Skipping Hindi" in record.message
             for record in caplog.records
-        ), f"Expected Devanagari warning but got: {[r.message for r in caplog.records]}"
+        ), f"Expected 'Skipping Hindi' log but got: {[r.message for r in caplog.records]}"
 
 
 # ---------------------------------------------------------------------------

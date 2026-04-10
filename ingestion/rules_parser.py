@@ -189,14 +189,15 @@ def parse_companies_rules(
             continue
 
         # ------------------------------------------------------------------
-        # Devanagari/Hindi — include as bilingual content
+        # Devanagari/Hindi — skip garbled duplicate content
         # ------------------------------------------------------------------
         if is_devanagari_majority(content):
             logger.debug(
-                "Hindi content at page %d: %r",
+                "Skipping Hindi content at page %d: %r",
                 page,
                 content[:80],
             )
+            continue
 
         # ------------------------------------------------------------------
         # Heading dispatch
@@ -291,6 +292,10 @@ def parse_companies_rules(
                 continue
 
             if current_rule is not None:
+                # Skip Hindi/Devanagari text in rule bodies (garbled duplicates)
+                if is_devanagari_majority(content):
+                    logger.debug("Skipping Hindi body text for rule %s", current_rule.number)
+                    continue
                 # Append to rule text and tag cross-references
                 if current_rule.text:
                     current_rule.text = current_rule.text + " " + content

@@ -119,7 +119,9 @@ IMPORTANT QUERY PATTERNS:
 2. Rule.number is STRING: WHERE r.number = '8' (not 8).
 3. Chapter.number is a Roman numeral STRING: WHERE c.number = 'VIII' (not 8).
 4. To find Rules related to a Section, use: (r:Rule)-[:REFERS_TO|PRESCRIBES_FOR|DERIVED_RULE]->(s:Section)
-5. To find penalty text, check subsections: (s:Section)-[:HAS_SUBSECTION]->(ss) WHERE ss.text CONTAINS 'penalty'
+5. To find penalty text, check subsections AND their clauses/subclauses: \
+(s:Section)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) \
+— penalty amounts are often in clauses (i), (ii) under subsections, not in subsection text itself
 6. For text search when exact property matches fail, use: WHERE s.text CONTAINS 'keyword'
 7. For negation queries (nodes WITHOUT a relationship), use: WHERE NOT EXISTS {{ MATCH (n)-[:REL]->(m) }}
 8. To traverse from Act to chapters to sections: (a:Act)-[:HAS_CHAPTER]->(c:Chapter)-[:HAS_SECTION]->(s:Section)
@@ -512,7 +514,12 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "cypher": (
                 "MATCH (s:Section {number: 447}) "
                 "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) "
-                "RETURN s.uid, s.title, s.text, collect(ss.text) AS subsections"
+                "WITH s, collect(DISTINCT ss.text) AS subsections "
+                "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->()-[:HAS_CLAUSE]->(cl) "
+                "WITH s, subsections, collect(DISTINCT cl.text) AS clauses "
+                "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->()-[:HAS_CLAUSE]->()-[:HAS_SUBCLAUSE]->(sc) "
+                "RETURN s.uid, s.title, s.text, subsections, clauses, "
+                "collect(DISTINCT sc.text) AS subclauses"
             ),
         },
         {
@@ -520,7 +527,10 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "cypher": (
                 "MATCH (s:Section {number: 448}) "
                 "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) "
-                "RETURN s.uid, s.title, s.text, collect(ss.text) AS subsections"
+                "WITH s, collect(DISTINCT ss.text) AS subsections "
+                "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->()-[:HAS_CLAUSE]->(cl) "
+                "RETURN s.uid, s.title, s.text, subsections, "
+                "collect(DISTINCT cl.text) AS clauses"
             ),
         },
         {
@@ -538,9 +548,13 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
             "cypher": (
                 "MATCH (s:Section {number: 185}) "
                 "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) "
-                "OPTIONAL MATCH (r:Rule)-[:REFERS_TO|PRESCRIBES_FOR]->(s) "
-                "RETURN s.uid, s.title, s.text, "
-                "collect(DISTINCT ss.text) AS subsections, "
+                "WITH s, collect(DISTINCT {uid: ss.uid, text: ss.text}) AS subsections "
+                "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->()-[:HAS_CLAUSE]->(cl) "
+                "WITH s, subsections, collect(DISTINCT {uid: cl.uid, text: cl.text}) AS clauses "
+                "OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->()-[:HAS_CLAUSE]->()-[:HAS_SUBCLAUSE]->(sc) "
+                "WITH s, subsections, clauses, collect(DISTINCT {uid: sc.uid, text: sc.text}) AS subclauses "
+                "OPTIONAL MATCH (r:Rule)-[:REFERS_TO|PRESCRIBES_FOR|DERIVED_RULE]->(s) "
+                "RETURN s.uid, s.title, s.text, subsections, clauses, subclauses, "
                 "collect(DISTINCT {rule_number: r.number, rule_text: r.text}) AS related_rules"
             ),
         },
@@ -582,10 +596,7 @@ INTENT_EXAMPLES: dict[str, list[dict[str, str]]] = {
         },
         {
             "question": "How many sections are in the Companies Act?",
-            "cypher": (
-                "MATCH (a:Act)-[:HAS_CHAPTER]->()-[:HAS_SECTION]->(s) "
-                "RETURN count(s) AS total_sections"
-            ),
+            "cypher": "MATCH (s:Section) RETURN count(s) AS total_sections",
         },
         {
             "question": "How many chapters are in the Companies Act?",

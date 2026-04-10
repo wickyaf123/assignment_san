@@ -1,0 +1,1505 @@
+{
+  "SE-001": {
+    "question": "Explain Section 135 with all its subsections and context",
+    "category": "structured_explanation",
+    "answer": "Section 135, titled \"Corporate Social Responsibility,\" falls under Chapter IX: ACCOUNTS OF COMPANIES [sec-135]. This section outlines the requirements for companies regarding Corporate Social Responsibility (CSR) activities and their associated committees and spending.\n\n**Key Provisions of Section 135:**\n\n*   **Constitution of CSR Committee (Subsection 1):** Companies meeting specific financial thresholds\u2014a net worth of \u20b9500 crore or more, a turnover of \u20b91000 crore or more, or a net profit of \u20b95 crore or more during the immediately preceding financial year\u2014are mandated to constitute a Corporate Social Responsibility Committee of the Board. This committee must comprise three or more directors, with at least one being an independent director [sec-135].\n*   **Disclosure of Committee Composition (Subsection 2):** The Board's report, as required under sub-section (3) of Section 134, must disclose the composition of the Corporate Social Responsibility Committee [sec-135-ss-2].\n*   **Functions of the CSR Committee (Subsection 3):** The Corporate Social Responsibility Committee is tasked with specific functions, though the provided text for this subsection is incomplete [sec-135-ss-3].\n*   **Approval and Disclosure of CSR Policy (Subsection 4):** The Board of every company subject to these provisions must, based on the CSR Committee's recommendations, approve the company's Corporate Social Responsibility Policy. The contents of this policy must be disclosed in the company's report and, if applicable, placed on its website in the prescribed manner [sec-135-ss-4].\n*   **Mandatory CSR Spending (Subsection 5):** Companies referred to in sub-section (1) must ensure that they spend, in every financial year, at least two percent of their average net profits made during the three immediately preceding financial years. For companies that have not completed three financial years since incorporation, the spending is based on the average net profits during such immediately preceding financial years, in pursuance of their CSR Policy [sec-135-ss-5].\n*   **Treatment of Unspent Amounts (Subsection 6):** Any amount remaining unspent from an ongoing CSR project, fulfilling prescribed conditions, must be transferred by the company within thirty days from the end of the financial year to a special \"Unspent Corporate Social Responsibility Account\" in a scheduled bank. This amount must then be spent on CSR obligations within three financial years from the date of transfer. Failure to do so requires the company to transfer the amount to a specified fund [sec-135-ss-6].\n*   **Penalties for Non-Compliance (Subsection 7):** Companies defaulting on the provisions of sub-section (5) or (6) are liable to a penalty of twice the amount required to be transferred to the specified Fund or the Unspent Corporate Social Responsibility Account, or \u20b91 crore, whichever is less. Every officer in default is liable to a penalty of one-tenth of the amount required to be transferred, or \u20b92 lakh, whichever is less [sec-135-ss-7].\n*   **Central Government Directions (Subsection 8):** The Central Government has the authority to issue general or special directions to companies or classes of companies to ensure compliance with this section, and such companies must adhere to these directions [sec-135-ss-8].\n*   **Exemption for Small Spending (Subsection 9):** If the amount to be spent by a company under sub-section (5) does not exceed \u20b950 lakh, the requirement to constitute a Corporate Social Responsibility Committee under sub-section (1) is not applicable. In such cases, the Board of Directors of the company will discharge the functions of the Committee [sec-135-ss-9].\n\n**Related Rules:**\nRule 8, which pertains to company names and suffixes, is also associated with this section [rule-8].\n\n**Cross-References:**\nWhile the graph results did not explicitly identify external cross-references to other sections via relationships, Section 135(2) internally refers to \"sub-section (3) of section 134\" for the disclosure of the CSR Committee's composition [sec-135-ss-2].",
+    "cypher": "MATCH (s:Section {number: 135})\nOPTIONAL MATCH (s)<-[:HAS_SECTION]-(c:Chapter)\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss:SubSection)\nOPTIONAL MATCH (r:Rule)-[:REFERS_TO|PRESCRIBES_FOR|DERIVED_RULE]->(s)\nOPTIONAL MATCH (s)-[sRefRel:REFERS_TO|SUBJECT_TO|NOTWITHSTANDING|PRESCRIBES_FOR]->(sTarget:Section)\nOPTIONAL MATCH (ss)-[ssRefRel:REFERS_TO|SUBJECT_TO|NOTWITHSTANDING|PRESCRIBES_FOR]->(ssTarget:Section)\nRETURN\n    s.uid,\n    s.title,\n    s.text,\n    c.uid AS chapter_uid,\n    c.number AS chapter_number,\n    c.title AS chapter_title,\n    COLLECT(DISTINCT {\n        subsection_uid: ss.uid,\n        subsection_number: ss.number,\n        subsection_text: ss.text\n    }) AS subsections,\n    COLLECT(DISTINCT {\n        rule_uid: r.uid,\n        rule_number: r.number,\n        rule_text: substring(r.text, 0, 150) + '...'\n    }) AS related_rules,\n    COLLECT(DISTINCT {\n        source_uid: s.uid,\n        target_section_uid: sTarget.uid,\n        target_section_number: sTarget.number,\n        target_section_title: sTarget.title,\n        relationship_type: type(sRefRel)\n    }) AS section_cross_references,\n    COLLECT(DISTINCT {\n        source_uid: ss.uid,\n        target_section_uid: ssTarget.uid,\n        target_section_number: ssTarget.number,\n        target_section_title: ssTarget.title,\n        relationship_type: type(ssRefRel)\n    }) AS subsection_cross_references",
+    "sources": [
+      {
+        "uid": "sec-135",
+        "type": "Section",
+        "text_excerpt": "135. Corporate Social Responsibility.--(1) Every company having net worth of rupees five hundred crore or more, or turnover of rupees one thousand crore or more or a net profit of rupees five crore or"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-135",
+        "uid": "sec-135",
+        "type": "Section",
+        "text_excerpt": "135. Corporate Social Responsibility.--(1) Every company having net worth of rupees five hundred crore or more, or turnover of rupees one thousand crore or more or a net profit of rupees five crore or",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 4,
+      "latency_ms": 97783.97,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 135
+    },
+    "status": "TIMEOUT",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 97.78396797180176
+  },
+  "SE-002": {
+    "question": "Give me a structured explanation of Section 149",
+    "category": "structured_explanation",
+    "answer": "**Section 149: Company to have Board of Directors** [sec-149]\n\n**Penalty and Punishment Provisions:**\n\n*   **Liability of Independent and Non-Executive Directors:**\n    *   An independent director or a non-executive director (not being a promoter or key managerial personnel) shall be held **liable** only in respect of such acts of omission or commission by a company which had occurred with their knowledge, attributable through Board processes, and with their consent or connivance, or where they had not acted diligently [sec-149-ss-12].\n\n**Note on Specific Penalties:**\nThe provided graph results for Section 149 detail the conditions under which certain directors may be held liable but do not specify the monetary fines, imprisonment terms, or other specific penalties associated with such liability.",
+    "cypher": "MATCH (s:Section {number: 149})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss:SubSection)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl:Clause)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc:SubClause)\nOPTIONAL MATCH (ss)-[:HAS_PROVISO]->(p_ss:Proviso)\nOPTIONAL MATCH (cl)-[:HAS_PROVISO]->(p_cl:Proviso)\nOPTIONAL MATCH (ss)-[:HAS_EXPLANATION]->(e_ss:Explanation)\nOPTIONAL MATCH (cl)-[:HAS_EXPLANATION]->(e_cl:Explanation)\nOPTIONAL MATCH (s)-[:HAS_DEFINITION]->(d:Definition)\nOPTIONAL MATCH (r:Rule)-[:DERIVED_RULE|REFERS_TO|PRESCRIBES_FOR]->(s)\nRETURN\n    s.uid,\n    s.title,\n    s.text,\n    collect(DISTINCT {uid: ss.uid, number: ss.number, text: ss.text}) AS subsections,\n    collect(DISTINCT {uid: cl.uid, label: cl.label, text: cl.text}) AS clauses,\n    collect(DISTINCT {uid: sc.uid, label: sc.label, text: sc.text}) AS subclauses,\n    collect(DISTINCT {uid: p_ss.uid, text: p_ss.text}) AS provisos_from_subsections,\n    collect(DISTINCT {uid: p_cl.uid, text: p_cl.text}) AS provisos_from_clauses,\n    collect(DISTINCT {uid: e_ss.uid, text: e_ss.text}) AS explanations_from_subsections,\n    collect(DISTINCT {uid: e_cl.uid, text: e_cl.text}) AS explanations_from_clauses,\n    collect(DISTINCT {uid: d.uid, term: d.term, text: d.text}) AS definitions,\n    collect(DISTINCT {uid: r.uid, number: r.number, text: r.text}) AS related_rules",
+    "sources": [
+      {
+        "uid": "sec-149",
+        "type": "Section",
+        "text_excerpt": "149. Company to have Board of Directors.--(1) Every company shall have a Board of Directors consisting of individuals as directors and shall have--"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-149",
+        "uid": "sec-149",
+        "type": "Section",
+        "text_excerpt": "149. Company to have Board of Directors.--(1) Every company shall have a Board of Directors consisting of individuals as directors and shall have--",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 21737.61,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 149
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 21.737634897232056
+  },
+  "SE-003": {
+    "question": "What is the penalty under Section 447 for fraud?",
+    "category": "structured_explanation",
+    "answer": "Under Section 447, the penalty for fraud involving an amount of at least ten lakh rupees or one per cent. of the turnover of the company, whichever is lower, is as follows:\n\nAny person found guilty shall be punishable with imprisonment for a term which shall not be less than six months but which may extend to ten years [sec-447]. Additionally, the person shall be liable to a fine which shall not be less than the amount involved in the fraud, but which may extend to three times the amount involved in the fraud [sec-447].",
+    "cypher": "MATCH (s:Section {number: 447}) OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) RETURN s.uid, s.title, s.text, collect(DISTINCT ss.text) AS subsections, collect(DISTINCT cl.text) AS clauses, collect(DISTINCT sc.text) AS subclauses",
+    "sources": [
+      {
+        "uid": "sec-447",
+        "type": "Section",
+        "text_excerpt": "447. Punishment for fraud.--Without prejudice to any liability including repayment of any debt under this Actor any other law for the time being in force, any person who is found to be guilty of fraud"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-447",
+        "uid": "sec-447",
+        "type": "Section",
+        "text_excerpt": "447. Punishment for fraud.--Without prejudice to any liability including repayment of any debt under this Actor any other law for the time being in force, any person who is found to be guilty of fraud",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 5635.64,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 447,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 5.635644197463989
+  },
+  "SE-004": {
+    "question": "Explain the CSR provisions and their penalties",
+    "category": "structured_explanation",
+    "answer": "Section 135 of the Companies Act, 2013, outlines the provisions for Corporate Social Responsibility (CSR).\n\n**I. Applicability and Requirements**\n\n1.  **Applicability**: Every company meeting any of the following criteria during the immediately preceding financial year must comply with CSR provisions [sec-135]:\n    *   Net worth of rupees five hundred crore or more, OR\n    *   Turnover of rupees one thousand crore or more, OR\n    *   Net profit of rupees five crore or more.\n2.  **CSR Committee**: Such companies shall constitute a Corporate Social Responsibility Committee of the Board, consisting of three or more directors, with at least one independent director [sec-135].\n    *   **Exception**: If the amount to be spent by a company under sub-section (5) does not exceed fifty lakh rupees, the requirement for constituting a CSR Committee is not applicable. In such cases, the functions of the Committee are discharged by the Board of Directors [sec-135-ss-9].\n3.  **Duties of the CSR Committee**: The Committee shall [sec-135-ss-3]:\n    *   Formulate and recommend to the Board a Corporate Social Responsibility Policy, indicating activities to be undertaken in areas specified in Schedule VII [sec-135-ss-3-cl-a].\n    *   Recommend the amount of expenditure to be incurred on these activities [sec-135-ss-3-cl-b].\n    *   Monitor the Corporate Social Responsibility Policy of the company from time to time [sec-135-ss-3-cl-c].\n4.  **Board's Responsibilities**: The Board of every company referred to in sub-section (1) shall [sec-135-ss-4]:\n    *   After considering the CSR Committee's recommendations, approve the Corporate Social Responsibility Policy, disclose its contents in its report, and place it on the company's website [sec-135-ss-4].\n    *   Ensure that the activities included in the CSR Policy are undertaken by the company [sec-135-ss-4-cl-b].\n    *   Ensure the company spends, in every financial year, at least two per cent. of the average net profits of the company made during the three immediately preceding financial years (or shorter period if newly incorporated) in pursuance of its CSR Policy [sec-135-ss-5].\n5.  **Unspent Amounts**:\n    *   Any amount remaining unspent from an ongoing project, fulfilling prescribed conditions, shall be transferred by the company within thirty days from the end of the financial year to a special \"Unspent Corporate Social Responsibility Account\" in a scheduled bank [sec-135-ss-6].\n    *   This amount must be spent within three financial years from the date of transfer. Failing this, the company shall transfer the same to a Fund specified in Schedule VII [sec-135-ss-6].\n6.  **Disclosure**: The Board's report under sub-section (3) of section 134 shall disclose the composition of the Corporate Social Responsibility Committee [sec-135-ss-2].\n7.  **Government Directions**: The Central Government may issue general or special directions to a company or class of companies to ensure compliance, which such companies shall comply with [sec-135-ss-8].\n\n**II. Penalties for Non-Compliance**\n\nIf a company is in default in complying with the provisions of sub-section (5) (spending requirement) or sub-section (6) (unspent amount transfer requirement) [sec-135-ss-7]:\n\n*   **Company**: The company shall be liable to a **penalty** of twice the amount required to be transferred to the Fund specified in Schedule VII or the Unspent Corporate Social Responsibility Account, as the case may be, or one crore rupees, whichever is less [sec-135-ss-7].\n*   **Officer in Default**: Every officer of the company who is in default shall be liable to a **penalty** of one-tenth of the amount required to be transferred by the company to such Fund or the Unspent Corporate Social Responsibility Account, as the case may be, or two lakh rupees, whichever is less [sec-135-ss-7].",
+    "cypher": "MATCH (s:Section {number: 135})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc)\nRETURN s.uid, s.title, s.text, collect(DISTINCT {subsection_uid: ss.uid, subsection_text: ss.text}) AS subsections, collect(DISTINCT {clause_uid: cl.uid, clause_text: cl.text}) AS clauses, collect(DISTINCT {subclause_uid: sc.uid, subclause_text: sc.text}) AS subclauses",
+    "sources": [
+      {
+        "uid": "sec-135",
+        "type": "Section",
+        "text_excerpt": "135. Corporate Social Responsibility.--(1) Every company having net worth of rupees five hundred crore or more, or turnover of rupees one thousand crore or more or a net profit of rupees five crore or"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-135",
+        "uid": "sec-135",
+        "type": "Section",
+        "text_excerpt": "135. Corporate Social Responsibility.--(1) Every company having net worth of rupees five hundred crore or more, or turnover of rupees one thousand crore or more or a net profit of rupees five crore or",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 14275.99,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 135,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 14.276015043258667
+  },
+  "SE-005": {
+    "question": "What are the penalties for violating Section 185?",
+    "category": "structured_explanation",
+    "answer": "For violations of Section 185, titled \"Loans to directors, etc.\" [sec-185], the following penalties apply if any loan is advanced or a guarantee or security is given or provided or utilised in contravention of its provisions [sec-185]:\n\n1.  **For the company**: The company shall be punishable with a fine which shall not be less than five lakh rupees but which may extend to twenty-five lakh rupees [sec-185].\n2.  **For every officer of the company who is in default**: Such officer shall be punishable with imprisonment for a term which may extend to six months or with a fine which shall not be less than five lakh rupees but which may extend to twenty-five lakh rupees [sec-185].\n3.  **For the director or the other person to whom any loan is advanced or guarantee or security is given or provided**: Such director or other person shall be punishable with imprisonment which may extend to six months or with a fine which shall not be less than five lakh rupees but which may extend to twenty-five lakh rupees, or with both [sec-185].",
+    "cypher": "MATCH (s:Section {number: 185}) OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) OPTIONAL MATCH (r:Rule)-[:REFERS_TO|PRESCRIBES_FOR|DERIVED_RULE]->(s) RETURN s.uid, s.title, s.text, collect(DISTINCT ss.text) AS subsections, collect(DISTINCT cl.text) AS clauses, collect(DISTINCT sc.text) AS subclauses, collect(DISTINCT {rule_number: r.number, rule_text: r.text, rule_uid: r.uid}) AS related_rules",
+    "sources": [
+      {
+        "uid": "sec-185",
+        "type": "Section",
+        "text_excerpt": "185. Loans to directors, etc.--(1) No company shall, directly or indirectly, advance any loan, including any loan represented by a book debt to, or give any guarantee or provide any security in connec"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-185",
+        "uid": "sec-185",
+        "type": "Section",
+        "text_excerpt": "185. Loans to directors, etc.--(1) No company shall, directly or indirectly, advance any loan, including any loan represented by a book debt to, or give any guarantee or provide any security in connec",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 7476.37,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 185,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 7.476386070251465
+  },
+  "SE-006": {
+    "question": "Explain Chapter IX on Accounts",
+    "category": "structured_explanation",
+    "answer": "Chapter IX of the Companies Act, titled \"ACCOUNTS OF COMPANIES,\" outlines the legal framework for company accounts [ch-IX].\n\nThis chapter includes provisions on:\n*   **Section 128** mandates companies to prepare and maintain books of account [sec-128].\n*   **Section 129** addresses financial statements, requiring them to present a true and fair view of the company's affairs and comply with prescribed standards [sec-129].\n*   **Section 130** restricts the re-opening of accounts or recasting of financial statements without orders from a court or Tribunal [sec-130].\n*   **Section 131** permits the voluntary revision of financial statements or the Board's report [sec-131].\n*   **Section 132** provides for the constitution of the National Financial Reporting Authority by the Central Government [sec-132].\n*   **Section 133** empowers the Central Government to prescribe accounting standards [sec-133].\n*   **Section 134** details the approval process for financial statements, including consolidated statements, and the Board's report [sec-134].\n*   **Section 135** outlines requirements for Corporate Social Responsibility (CSR), applicable to companies meeting specific net worth or turnover thresholds [sec-135].\n*   **Section 136** grants members the right to receive copies of audited financial statements [sec-136].\n*   **Section 137** requires companies to file copies of their financial statements, including consolidated statements, with the Registrar [sec-137].\n*   **Section 138** mandates certain classes of companies to appoint an internal auditor [sec-138].",
+    "cypher": "MATCH (a:Act {uid: 'act-companies-2013'})-[:HAS_CHAPTER]->(c:Chapter {number: 'IX'})\nOPTIONAL MATCH (c)-[:HAS_SECTION]->(s:Section)\nWITH c, s ORDER BY s.number ASC\nRETURN c.uid, c.number, c.title, collect({section_uid: s.uid, section_number: s.number, section_title: s.title, section_text_preview: substring(s.text, 0, 150)}) AS sections",
+    "sources": [
+      {
+        "uid": "ch-IX",
+        "type": "Chapter",
+        "text_excerpt": "ACCOUNTS OF COMPANIES"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "ch-IX",
+        "uid": "ch-IX",
+        "type": "Chapter",
+        "text_excerpt": "ACCOUNTS OF COMPANIES",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 23544.91,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "chapter": "IX"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 23.54491090774536
+  },
+  "SE-007": {
+    "question": "What does Chapter VIII cover?",
+    "category": "structured_explanation",
+    "answer": "Chapter VIII, titled \"DECLARATION AND PAYMENT OF DIVIDEND\" [ch-VIII], addresses various aspects related to dividends. It covers the declaration of dividends [sec-123], the establishment and management of the Unpaid Dividend Account [sec-124], and the Investor Education and Protection Fund [sec-125]. Additionally, Chapter VIII details the right to dividend, rights shares, and bonus shares, specifying that these are to be held in abeyance pending registration of transfer of shares [sec-126]. It also outlines the punishment for failure to distribute dividends [sec-127].",
+    "cypher": "MATCH (c:Chapter {number: 'VIII'})-[:HAS_SECTION]->(s:Section) RETURN c.uid, s.uid, c.title, s.number, s.title ORDER BY s.number LIMIT 50",
+    "sources": [
+      {
+        "uid": "ch-VIII",
+        "type": "Chapter",
+        "text_excerpt": "DECLARATION AND PAYMENT OF DIVIDEND"
+      },
+      {
+        "uid": "sec-123",
+        "type": "Section",
+        "text_excerpt": "Declaration of dividend"
+      },
+      {
+        "uid": "sec-124",
+        "type": "Section",
+        "text_excerpt": "Unpaid Dividend Account"
+      },
+      {
+        "uid": "sec-125",
+        "type": "Section",
+        "text_excerpt": "Investor Education and Protection Fund"
+      },
+      {
+        "uid": "sec-126",
+        "type": "Section",
+        "text_excerpt": "Right to dividend, rights shares and bonus shares to be held in abeyance pending registration of transfer of shares"
+      },
+      {
+        "uid": "sec-127",
+        "type": "Section",
+        "text_excerpt": "Punishment for failure to distribute dividends"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "ch-VIII",
+        "uid": "ch-VIII",
+        "type": "Chapter",
+        "text_excerpt": "DECLARATION AND PAYMENT OF DIVIDEND",
+        "index": 1
+      },
+      {
+        "marker": "sec-123",
+        "uid": "sec-123",
+        "type": "Section",
+        "text_excerpt": "Declaration of dividend",
+        "index": 2
+      },
+      {
+        "marker": "sec-124",
+        "uid": "sec-124",
+        "type": "Section",
+        "text_excerpt": "Unpaid Dividend Account",
+        "index": 3
+      },
+      {
+        "marker": "sec-125",
+        "uid": "sec-125",
+        "type": "Section",
+        "text_excerpt": "Investor Education and Protection Fund",
+        "index": 4
+      },
+      {
+        "marker": "sec-126",
+        "uid": "sec-126",
+        "type": "Section",
+        "text_excerpt": "Right to dividend, rights shares and bonus shares to be held in abeyance pending registration of transfer of shares",
+        "index": 5
+      },
+      {
+        "marker": "sec-127",
+        "uid": "sec-127",
+        "type": "Section",
+        "text_excerpt": "Punishment for failure to distribute dividends",
+        "index": 6
+      }
+    ],
+    "metadata": {
+      "intent": "general_info",
+      "retry_count": 1,
+      "latency_ms": 6197.64,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "chapter": "VIII"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 6.197672367095947
+  },
+  "SE-008": {
+    "question": "Explain the structure of the Companies Act 2013",
+    "category": "structured_explanation",
+    "answer": "The Companies Act, 2013 [act-companies-2013] is structured into several chapters, each addressing specific aspects of company law. The structure is as follows:\n\n*   **Chapter I: PRELIMINARY SECTIONS** [ch-I]\n    This chapter includes foundational provisions such as Section 1, which pertains to 'PART III- GENERAL INSTRUCTIONS FOR THE PREPARATION OF CONSOLIDATED FINANCIAL STATEMENTS' [sec-1], and Section 2, which notes 'The words \"with imprisonment for a term which may extend to three years or\" omitted by Act 29 of 2020, s. 3' [sec-2]. It also contains Section 3, concerning disclosures in 'Consolidated Financial Statements' [sec-3], and Section 24, addressing the 'Power of Securities and Exchange Board to regulate issue and transfer of securities, etc.' [sec-24].\n\n*   **Chapter II: INCORPORATION OF COMPANY AND MATTERS INCIDENTAL THERETO** [ch-II]\n    This chapter covers the process of company incorporation, including Section 3, which details disclosures in 'Consolidated Financial Statements' [sec-3], Section 4, which refers to the 'Power of Securities and Exchange Board to regulate issue and transfer of securities, etc.' [sec-4], and Section 5, which mentions an amendment regarding penalties [sec-5].\n\n*   **Chapter III: PROSPECTUS AND ALLOTMENT OF SECURITIES PART I.--Public offer** [ch-III]\n    This chapter deals with public offers and securities allotment. Key sections include Section 23 on 'Proceedings of the Board' [sec-23], Section 25 on 'Document containing offer of securities for sale to be deemed prospectus' [sec-25], Section 26 on 'Matters to be stated in prospectus' [sec-26], Section 27 on 'Variation in terms of contract or objects in prospectus' [sec-27], and Section 28 on 'Offer of sale of shares by certain members of company' [sec-28].\n\n*   **Chapter IV: SHARE CAPITAL AND DEBENTURES** [ch-IV]\n    This chapter outlines regulations concerning share capital and debentures. It includes Section 43 on 'Kinds of share capital' [sec-43], Section 46 on 'Certificate of shares' [sec-46], Section 47 on 'Voting rights' [sec-47], Section 48 on 'Variations of shareholders' rights' [sec-48], Section 49 on 'Calls on shares of same class to be made on uniform basis' [sec-49], Section 50 on a 'Company to accept unpaid share capital, although not called up' [sec-50], and Section 52 on the 'Application of premiums received' [sec-52].\n\n*   **Chapter V: ACCEPTANCE OF DEPOSITS BY COMPANIES** [ch-V]\n    This chapter focuses on the acceptance of deposits by companies. It contains Section 73, which prohibits 'acceptance of deposits from public' [sec-73], Section 74 on 'Repayment of deposits, etc., accepted before commencement of this Act' [sec-74], Section 75 on 'Damages for fraud' [sec-75], and Section 76 on 'Acceptance of deposits from public by certain companies' [sec-76].\n\n*   **Chapter VI: REGISTRATION OF CHARGES** [ch-VI]\n    This chapter addresses the registration of charges. It includes Section 77 on the 'Duty to register charges, etc' [sec-77], Section 78 on 'Application for registration of charge' [sec-78], Section 79 on the applicability of Section 77 [sec-79], Section 80 on the 'Date of notice of charge' [sec-80], Section 81 on the 'Register of charges to be kept by Registrar' [sec-81], and Section 82 on a 'Company to report satisfaction of charge' [sec-82].\n\n*   **Chapter VII: MANAGEMENT AND ADMINISTRATION** [ch-VII]\n    This chapter covers various aspects of company management and administration. Key provisions include Section 88 on 'Register of members, etc' [sec-88], Section 89 on 'Declaration in respect of beneficial interest in any share' [sec-89], Section 90 on 'Register of significant beneficial owners in a Company' [sec-90], Section 91 on the 'Power to close register of members or debenture holders or other security holders' [sec-91], and Section 92 on 'Annual return' [sec-92].\n\n*   **Chapter VIII: DECLARATION AND PAYMENT OF DIVIDEND** [ch-VIII]\n    This chapter deals with the declaration and payment of dividends. It includes Section 123 on 'Declaration of dividend' [sec-123], Section 124 on the 'Unpaid Dividend Account' [sec-124], Section 125 on the 'Investor Education and Protection Fund' [sec-125], Section 126 on the 'Right to dividend, rights shares and bonus shares to be held in abeyance pending registration of transfer of shares' [sec-126], and Section 127 on 'Punishment for failure to distribute dividends' [sec-127].\n\n*   **Chapter IX: ACCOUNTS OF COMPANIES** [ch-IX]\n    This chapter sets out requirements for company accounts. It includes Section 128 on 'Books of account, etc., to be kept by company' [sec-128], Section 129, which reiterates aspects of Section 128 [sec-129], Section 130 on 'Re-opening of accounts on court's or Tribunal's orders' [sec-130], Section 131 on 'Voluntary revision of financial statements or Board's report' [sec-131], and Section 132, which further elaborates on Section 131 [sec-132].\n\n*   **Chapter X: AUDIT AND AUDITORS** [ch-X]\n    This chapter governs the audit process and auditors. It covers Section 139 on 'Appointment of auditors' [sec-139], Section 140 on 'Removal, resignation of auditor and giving of special notice' [sec-140], Section 141 on 'Eligibility, qualifications and disqualifications of auditors' [sec-141], Section 142 on 'Remuneration of auditors' [sec-142], Section 143 on 'Powers and duties of auditors and auditing standards' [sec-143], and Section 144 on 'Auditor not to render certain services' [sec-144].\n\n*   **Chapter XI: APPOINTMENT AND QUALIFICATIONS OF DIRECTORS** [ch-XI]\n    This chapter addresses the appointment and qualifications of directors. It includes Section 149 on the requirement for a 'Company to have Board of Directors' [sec-149], Section 150 on the 'Manner of selection of independent directors' [sec-150], Section 152, which refers to the 'Appointment of director elected by small shareholders' [sec-152], and Section 153 on 'Application for allotment of Director Identification Number' [sec-153].\n\n*   **Chapter XII: MEETINGS OF BOARD AND ITS POWERS** [ch-XII]\n    This chapter details the meetings and powers of the Board. It includes Section 173 on 'Meetings of Board' [sec-173], Section 174 on 'Quorum for meetings of Board' [sec-174], Section 175 on 'Passing of resolution by circulation' [sec-175], Section 176 on 'Defects in appointment of directors not to invalidate actions taken' [sec-176], Section 177 on the 'Audit committee' [sec-177], and Section 178 on the 'Nomination and Remuneration Committee and Stakeholders Relationship Committee' [sec-178].\n\n*   **Chapter XIII: APPOINTMENT AND REMUNERATION OF MANAGERIAL PERSONNEL SECTIONS** [ch-XIII]\n    This chapter focuses on the appointment and remuneration of managerial personnel. It includes Section 196 on the 'Appointment of managing director, whole-time director or manager' [sec-196], Section 197, which further elaborates on Section 196 [sec-197], Section 198 on 'Calculation of profits' [sec-198], Section 199 on 'Recovery of remuneration in certain cases' [sec-199], and Section 200 on the 'Central Government or company to fix limit with regard to remuneration' [sec-200].\n\n*   **Chapter XIV: INSPECTION, INQUIRY AND INVESTIGATION** [ch-XIV]\n    This chapter covers inspection, inquiry, and investigation powers. It includes Section 206 on the 'Power to call for information, inspect books and conduct inquiries' [sec-206], Section 207 on the 'Conduct of inspection and inquiry' [sec-207], Section 208 on the 'Report on inspection made' [sec-208], Section 209 on 'Search and seizure' [sec-209], Section 210 on 'Investigation into affairs of company' [sec-210], and Section 211 on the 'Establishment of Serious Fraud Investigation Office' [sec-211].\n\n*   **Chapter XV: COMPROMISES, ARRANGEMENTS AND AMALGAMATIONS** [ch-XV]\n    This chapter addresses compromises, arrangements, and amalgamations. It includes Section 230 on the 'Power to compromise or make arrangements with creditors and members' [sec-230], Section 231 on the 'Power to Tribunal to enforce compromise or arrangement' [sec-231], Section 232, which further details Section 231 [sec-232], Section 233 on 'Merger or amalgamation of certain companies' [sec-233], and Section 234 on 'Merger or amalgamation of company with foreign company' [sec-234].\n\n*   **Chapter XVI: PREVENTION OF OPPRESSION AND MISMANAGEMENT** [ch-XVI]\n    This chapter deals with the prevention of oppression and mismanagement. It includes Section 241 on 'Application to Tribunal for relief in cases of oppression, etc' [sec-241], Section 242, which further elaborates on Section 241 [sec-242], Section 243 on 'Consequence of termination or modification of certain agreements' [sec-243], Section 244 on the 'Right to apply under section 241' [sec-244], and Section 245 on 'Class action' [sec-245].\n\n*   **Chapter XVII: REGISTERED VALUERS** [ch-XVII]\n    This chapter contains Section 247, which addresses 'Valuation by registered valuers' [sec-247].\n\n*   **Chapter XVIII: REMOVAL OF NAMES OF COMPANIES FROM THE REGISTER OF COMPANIES** [ch-XVIII]\n    This chapter outlines the process for removing company names from the register. It includes Section 248 on the 'Power of Registrar to remove name of company from register of companies' [sec-248], Section 249, which further details Section 248 [sec-249], Section 250 on the 'Effect of company notified as dissolved' [sec-250], Section 251 on 'Fraudulent application for removal of name' [sec-251], and Section 252 on 'Appeal to Tribunal' [sec-252].\n\n*   **Chapter XIX: REVIVAL AND REHABILITATION OF SICK COMPANIES** [ch-XIX]\n    This chapter, largely superseded, includes Section 253 on the '[Determination of sickness. Omitted by the Insolvency and Bankruptcy Code, 2016' [sec-253], Section 254 on '[Application for revival and rehabilitation. Omitted by s. 255 and the Eleventh Schedule, ibid' [sec-254], Section 255, which is '[Omitted' [sec-255], and Section 256 on '[Appointment of interim administrator.Omitted by s. 255 and the Eleventh Schedule, ibid' [sec-256].\n\n*   **Chapter XX: WINDING UP SECTIONS** [ch-XX]\n    This chapter details the winding-up procedures for companies. It includes Section 270 on 'Winding up by Tribunal' [sec-270], Section 271 on 'Circumstances in which company may be wound up by Tribunal' [sec-271], Section 272 on 'Petition for winding up' [sec-272], Section 273 on 'Powers of Tribunal' [sec-273], Section 274 on 'Directions for filing statement of affairs' [sec-274], and Section 275 on 'Company Liquidators and their appointments' [sec-275].\n\n*   **Chapter XXI: PART I.-- Companies Authorised to Register under this Act** [ch-XXI]\n    This chapter covers companies authorized to register under the Act. It includes Section 366 on 'Companies capable of being registered' [sec-366], Section 367 on 'Certificate of registration of existing companies' [sec-367], Section 368 on 'Vesting of property on registration' [sec-368], Section 369 on 'Saving of existing liabilities' [sec-369], and Section 370 on 'Continuation of pending legal proceedings' [sec-370].\n\n*   **Chapter XXII: COMPANIES INCORPORATED OUTSIDE INDIA** [ch-XXII]\n    This chapter addresses companies incorporated outside India. It includes Section 379 on the 'Application of Act to foreign companies' [sec-379], Section 380 on 'Documents, etc., to be delivered to Registrar by foreign companies' [sec-380], Section 381 on 'Accounts of foreign company' [sec-381], Section 382 on 'Display of name, etc., of foreign company' [sec-382], and Section 383, which further details Section 382 [sec-383].\n\n*   **Chapter XXIII: GOVERNMENT COMPANIES SECTIONS** [ch-XXIII]\n    This chapter pertains to Government companies. It includes Section 394 on 'Annual reports on Government companies' [sec-394] and Section 395 on 'Annual reports where one or more State Governments are members of companies' [sec-395].\n\n*   **Chapter XXIV: REGISTRATION OFFICES AND FEES** [ch-XXIV]\n    This chapter covers registration offices and associated fees. It includes Section 396 on 'Registration offices' [sec-396], Section 397 on 'Admissibility of certain documents as evidence' [sec-397], Section 398 on 'Provisions relating to filing of applications, documents, inspection, etc., in electronic form' [sec-398], Section 399 on 'Inspection, production and evidence of documents kept by Registrar' [sec-399], and Section 400 on 'Electronic form to be exclusive, alternative or in addition to physical form' [sec-400].\n\n*   **Chapter XXV: COMPANIES TO FURNISH INFORMATION OR STATISTICS** [ch-XXV]\n    This chapter contains Section 405, which grants the 'Power of Central Government to direct companies to furnish information or statistics' [sec-405].\n\n*   **Chapter XXVI: NIDHIS** [ch-XXVI]\n    This chapter includes Section 406, which provides 'Provision relating to Nidhis and its application, etc' [sec-406].\n\n*   **Chapter XXVII: NATIONAL COMPANY LAW TRIBUNAL AND APPELLATE TRIBUNAL** [ch-XXVII]\n    This chapter establishes the National Company Law Tribunal and Appellate Tribunal. It includes Section 407 on 'Definitions' [sec-407], Section 408 on the 'Constitution of National Company Law Tribunal' [sec-408], Section 409 on 'Qualification of President and Members of Tribunal' [sec-409], Section 410 on the 'Constitution of Appellate Tribunal' [sec-410], Section 411 on 'Qualifications of Chairperson and members of Appellate Tribunal' [sec-411], and Section 412 on the 'Selection of Members of Tribunal and Appellate Tribunal' [sec-412].\n\n*   **Chapter XXVIII: SPECIAL COURTS** [ch-XXVIII]\n    This chapter deals with Special Courts. It includes Section 435 on the 'Establishment of Special Courts' [sec-435], Section 436 on 'Offences triable by Special Courts' [sec-436], Section 437 on 'Appeal and revision' [sec-437], Section 438 on 'Application of Code to proceedings before Special Court' [sec-438], Section 439 on 'Offences to be non-cognizable' [sec-439], and Section 440, which further details Section 439 [sec-440].\n\n*   **Chapter XXIX: MISCELLANEOUS** [ch-XXIX]\n    This chapter contains various miscellaneous provisions, including Section 6, which refers to an amendment regarding penalties [sec-6], Section 11 on '[Commencement of business, etc. Omitted by the Companies' [sec-11], Section 12 on the 'Registered office of company' [sec-12], Section 24 on 'Transmission of shares' [sec-24], and Section 83 on 'Dividends and Reserve' [sec-83].",
+    "cypher": "MATCH (a:Act {uid: 'act-companies-2013'})\nMATCH (a)-[:HAS_CHAPTER]->(c:Chapter)\nOPTIONAL MATCH (c)-[:HAS_SECTION]->(s:Section)\nWITH a, c, s\nORDER BY s.number\nWITH a, c, COLLECT(DISTINCT {\n    section_uid: s.uid,\n    section_number: s.number,\n    section_title: s.title\n}) AS sections_list\nORDER BY c.number\nRETURN\n    a.uid,\n    a.title,\n    COLLECT(DISTINCT {\n        chapter_uid: c.uid,\n        chapter_number: c.number,\n        chapter_title: c.title,\n        sections: sections_list\n    }) AS chapters\nLIMIT 50",
+    "sources": [
+      {
+        "uid": "act-companies-2013",
+        "type": "Act",
+        "text_excerpt": "The Companies Act, 2013"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "act-companies-2013",
+        "uid": "act-companies-2013",
+        "type": "Act",
+        "text_excerpt": "The Companies Act, 2013",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 57463.01,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "expects_list": true
+    },
+    "status": "TIMEOUT",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 57.46310997009277
+  },
+  "SE-009": {
+    "question": "How many sections are in the Companies Act?",
+    "category": "structured_explanation",
+    "answer": "The Companies Act contains 757 sections.",
+    "cypher": "MATCH (a:Act {uid: 'act-companies-2013'})-[:HAS_CHAPTER]->()-[:HAS_SECTION]->(s:Section) RETURN count(s) AS total_sections",
+    "sources": [],
+    "citations": [],
+    "metadata": {
+      "intent": "general_info",
+      "retry_count": 1,
+      "latency_ms": 8596.97,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "expects_count": true
+    },
+    "status": "FAIL",
+    "has_citations": false,
+    "fallback_used": false,
+    "elapsed_seconds": 8.596971988677979
+  },
+  "SE-010": {
+    "question": "What are all the definitions in the Companies Act?",
+    "category": "structured_explanation",
+    "answer": "The Companies Act includes definitions for the following terms:\n\n*   **abridged prospectus** means a memorandum containing such salient features of a prospectus as may be specified by the Securities and Exchange Board by making regulations in this behalf [def-abridged-prospectus].\n*   **accounting standards** means the standards of accounting or any addendum thereto for companies or class of companies referred to in section 133 [def-accounting-standards].\n*   **Appellate Tribunal** means the National Company Law Appellate Tribunal constituted under section 410 [def-appellate-tribunal].\n*   **articles** means the articles of association of a company as originally framed or as altered from time to time or applied in pursuance of any previous company law or of this Act [def-articles].\n*   **auditing standards** means the standards of auditing or any addendum thereto for companies or class of companies referred to in sub-section (10) of section 143 [def-auditing-standards].\n*   **banking company** means a banking company as defined in clause (c) of section 5 of the Banking Regulation Act, 1949 (10 of 1949) [def-banking-company].\n*   **books of account** includes records maintained in respect of-- [def-books-of-account].\n*   **called-up capital** means such part of the capital, which has been called for payment [def-called-up-capital].\n*   **charge** means an interest or lien created on the property or assets of a company or any of its undertakings or both as security and includes a mortgage [def-charge].\n*   **chartered accountant** means a chartered accountant as defined in clause (b) of sub-section (1) of section 2 of the Chartered Accountants Act, 1949 (38 of 1949) who holds a valid certificate of practice under sub-section (1) of section 6 of that Act [def-chartered-accountant].\n*   **Chief Executive Officer** means an officer of a company, who has been designated as such by it [def-chief-executive-officer].\n*   **Chief Financial Officer** means a person appointed as the Chief Financial Officer of a company [def-chief-financial-officer].\n*   **company limited by shares** means a company having the liability of its members limited by the memorandum to the amount, if any, unpaid on the shares respectively held by them [def-company-limited-by-shares].\n*   **Company Liquidator** means a person appointed by the Tribunal as the Company Liquidator in accordance with the provisions of section 275 for the winding up of a company under this Act [def-company-liquidator].\n*   **company secretary in practice** means a company secretary who is deemed to be in practice under sub-section (2) of section 2 of the Company Secretaries Act, 1980 (56 of 1980) [def-company-secretary-in-practice].\n*   **contributory** means a person liable to contribute towards the assets of the company in the event of its being wound up [def-contributory].\n*   **control** shall include the right to appoint majority of the directors or to control the management or policy decisions exercisable by a person or persons acting individually or in concert, directly or indirectly, including by virtue of their shareholding or management rights or shareholders agreements or voting agreements or in any other manner [def-control].\n*   **Cost Accountant** means a cost accountant as defined in clause (b) of sub-section (1) of section 2 of the Cost and Works Accountants Act, 1959 (23 of 1959) and who holds a valid certificate of practice under sub-section (1) of section 6 of that Act [def-cost-accountant].\n*   **court** means-- [def-court].\n*   **debenture** includes debenture stock, bonds or any other instrument of a company evidencing a debt, whether constituting a charge on the assets of the company or not: Provided that-- [def-debenture].\n*   **deposit** includes any receipt of money by way of deposit or loan or in any other form by a company, but does not include such categories of amount as may be prescribed in consultation with the Reserve Bank of India [def-deposit].\n*   **depository** means a depository as defined in clause (e) of sub-section (1) of section 2 of the Depositories Act, 1996 (22 of 1996) [def-depository].\n*   **derivative** means the derivative as defined in clause (ac) of section 2 of the Securities Contracts (Regulation) Act, 1956 (42 of 1956) [def-derivative].\n*   **director** means a director appointed to the Board of a company [def-director].\n*   **dividend** includes any interim dividend [def-dividend].",
+    "cypher": "MATCH (d:Definition) RETURN d.uid, d.term, d.text ORDER BY d.term LIMIT 25",
+    "sources": [
+      {
+        "uid": "def-abridged-prospectus",
+        "type": "Definition",
+        "text_excerpt": "(1) \"abridged prospectus\" means a memorandum containing such salient features of a prospectus as may be specified by the Securities and Exchange Board by making regulations in this behalf;"
+      },
+      {
+        "uid": "def-accounting-standards",
+        "type": "Definition",
+        "text_excerpt": "(2) \"accounting standards\" means the standards of accounting or any addendum thereto for companies or class of companies referred to in section 133;"
+      },
+      {
+        "uid": "def-appellate-tribunal",
+        "type": "Definition",
+        "text_excerpt": "(4) \"Appellate Tribunal\" means the National Company Law Appellate Tribunal constituted under section 410;"
+      },
+      {
+        "uid": "def-articles",
+        "type": "Definition",
+        "text_excerpt": "(5) \"articles\" means the articles of association of a company as originally framed or as altered from time to time or applied in pursuance of any previous company law or of this Act;"
+      },
+      {
+        "uid": "def-auditing-standards",
+        "type": "Definition",
+        "text_excerpt": "(7) \"auditing standards\" means the standards of auditing or any addendum thereto for companies or class of companies referred to in sub-section (10) of section 143;"
+      },
+      {
+        "uid": "def-banking-company",
+        "type": "Definition",
+        "text_excerpt": "(9) \"banking company\" means a banking company as defined in clause (c) of section 5 of the Banking Regulation Act, 1949 (10 of 1949);"
+      },
+      {
+        "uid": "def-books-of-account",
+        "type": "Definition",
+        "text_excerpt": "(13) \"books of account\" includes records maintained in respect of-- 1. The Explanation subs. by Act 1 of 2018, s. 2 (w.e.f. 7-5-2018)."
+      },
+      {
+        "uid": "def-called-up-capital",
+        "type": "Definition",
+        "text_excerpt": "(15) \"called-up capital\" means such part of the capital, which has been called for payment;"
+      },
+      {
+        "uid": "def-charge",
+        "type": "Definition",
+        "text_excerpt": "(16) \"charge\" means an interest or lien created on the property or assets of a company or any of its undertakings or both as security and includes a mortgage;"
+      },
+      {
+        "uid": "def-chartered-accountant",
+        "type": "Definition",
+        "text_excerpt": "(17) \"chartered accountant\" means a chartered accountant as defined in clause (b) of sub-section (1) of section 2 of the Chartered Accountants Act, 1949 (38 of 1949) who holds a valid certificate of p"
+      },
+      {
+        "uid": "def-chief-executive-officer",
+        "type": "Definition",
+        "text_excerpt": "(18) \"Chief Executive Officer\" means an officer of a company, who has been designated as such by it;"
+      },
+      {
+        "uid": "def-chief-financial-officer",
+        "type": "Definition",
+        "text_excerpt": "(19) \"Chief Financial Officer\" means a person appointed as the Chief Financial Officer of a company; (20) \"company\" means a company incorporated under this Act or under any previous company law; (21) "
+      },
+      {
+        "uid": "def-company-limited-by-shares",
+        "type": "Definition",
+        "text_excerpt": "(22) \"company limited by shares\" means a company having the liability of its members limited by the memorandum to the amount, if any, unpaid on the shares respectively held by them;"
+      },
+      {
+        "uid": "def-company-liquidator",
+        "type": "Definition",
+        "text_excerpt": "(23) \"Company Liquidator\" means a person appointed by the Tribunal as the Company Liquidator in accordance with the provisions of section 275 for the winding up of a company under this Act;"
+      },
+      {
+        "uid": "def-company-secretary-in-practice",
+        "type": "Definition",
+        "text_excerpt": "(25) \"company secretary in practice\" means a company secretary who is deemed to be in practice under sub-section (2) of section 2 of the Company Secretaries Act, 1980 (56 of 1980);"
+      },
+      {
+        "uid": "def-contributory",
+        "type": "Definition",
+        "text_excerpt": "(26) \"contributory\" means a person liable to contribute towards the assets of the company in the event of its being wound up."
+      },
+      {
+        "uid": "def-control",
+        "type": "Definition",
+        "text_excerpt": "(27) \"control\" shall include the right to appoint majority of the directors or to control the management or policy decisions exercisable by a person or persons acting individually or in concert, direc"
+      },
+      {
+        "uid": "def-cost-accountant",
+        "type": "Definition",
+        "text_excerpt": "(28) \"Cost Accountant\" means a cost accountant as defined in clause (b) of sub-section (1) of section 2 of the Cost and Works Accountants Act, 1959 (23 of 1959) and who holds a valid certificate of pr"
+      },
+      {
+        "uid": "def-court",
+        "type": "Definition",
+        "text_excerpt": "(29) \"court\" means--"
+      },
+      {
+        "uid": "def-debenture",
+        "type": "Definition",
+        "text_excerpt": "(30) \"debenture\" includes debenture stock, bonds or any other instrument of a company evidencing a debt, whether constituting a charge on the assets of the company or not: Provided that--"
+      },
+      {
+        "uid": "def-deposit",
+        "type": "Definition",
+        "text_excerpt": "(31) \"deposit\" includes any receipt of money by way of deposit or loan or in any other form by a company, but does not include such categories of amount as may be prescribed in consultation with the R"
+      },
+      {
+        "uid": "def-depository",
+        "type": "Definition",
+        "text_excerpt": "(32) \"depository\" means a depository as defined in clause (e) of sub-section (1) of section 2 of the Depositories Act, 1996 (22 of 1996);"
+      },
+      {
+        "uid": "def-derivative",
+        "type": "Definition",
+        "text_excerpt": "(33) \"derivative\" means the derivative as defined in clause (ac) of section 2 of the Securities Contracts (Regulation) Act, 1956 (42 of 1956);"
+      },
+      {
+        "uid": "def-director",
+        "type": "Definition",
+        "text_excerpt": "(34) \"director\" means a director appointed to the Board of a company;"
+      },
+      {
+        "uid": "def-dividend",
+        "type": "Definition",
+        "text_excerpt": "(35) \"dividend\" includes any interim dividend;"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "def-abridged-prospectus",
+        "uid": "def-abridged-prospectus",
+        "type": "Definition",
+        "text_excerpt": "(1) \"abridged prospectus\" means a memorandum containing such salient features of a prospectus as may be specified by the Securities and Exchange Board by making regulations in this behalf;",
+        "index": 1
+      },
+      {
+        "marker": "def-accounting-standards",
+        "uid": "def-accounting-standards",
+        "type": "Definition",
+        "text_excerpt": "(2) \"accounting standards\" means the standards of accounting or any addendum thereto for companies or class of companies referred to in section 133;",
+        "index": 2
+      },
+      {
+        "marker": "def-appellate-tribunal",
+        "uid": "def-appellate-tribunal",
+        "type": "Definition",
+        "text_excerpt": "(4) \"Appellate Tribunal\" means the National Company Law Appellate Tribunal constituted under section 410;",
+        "index": 3
+      },
+      {
+        "marker": "def-articles",
+        "uid": "def-articles",
+        "type": "Definition",
+        "text_excerpt": "(5) \"articles\" means the articles of association of a company as originally framed or as altered from time to time or applied in pursuance of any previous company law or of this Act;",
+        "index": 4
+      },
+      {
+        "marker": "def-auditing-standards",
+        "uid": "def-auditing-standards",
+        "type": "Definition",
+        "text_excerpt": "(7) \"auditing standards\" means the standards of auditing or any addendum thereto for companies or class of companies referred to in sub-section (10) of section 143;",
+        "index": 5
+      },
+      {
+        "marker": "def-banking-company",
+        "uid": "def-banking-company",
+        "type": "Definition",
+        "text_excerpt": "(9) \"banking company\" means a banking company as defined in clause (c) of section 5 of the Banking Regulation Act, 1949 (10 of 1949);",
+        "index": 6
+      },
+      {
+        "marker": "def-books-of-account",
+        "uid": "def-books-of-account",
+        "type": "Definition",
+        "text_excerpt": "(13) \"books of account\" includes records maintained in respect of-- 1. The Explanation subs. by Act 1 of 2018, s. 2 (w.e.f. 7-5-2018).",
+        "index": 7
+      },
+      {
+        "marker": "def-called-up-capital",
+        "uid": "def-called-up-capital",
+        "type": "Definition",
+        "text_excerpt": "(15) \"called-up capital\" means such part of the capital, which has been called for payment;",
+        "index": 8
+      },
+      {
+        "marker": "def-charge",
+        "uid": "def-charge",
+        "type": "Definition",
+        "text_excerpt": "(16) \"charge\" means an interest or lien created on the property or assets of a company or any of its undertakings or both as security and includes a mortgage;",
+        "index": 9
+      },
+      {
+        "marker": "def-chartered-accountant",
+        "uid": "def-chartered-accountant",
+        "type": "Definition",
+        "text_excerpt": "(17) \"chartered accountant\" means a chartered accountant as defined in clause (b) of sub-section (1) of section 2 of the Chartered Accountants Act, 1949 (38 of 1949) who holds a valid certificate of p",
+        "index": 10
+      },
+      {
+        "marker": "def-chief-executive-officer",
+        "uid": "def-chief-executive-officer",
+        "type": "Definition",
+        "text_excerpt": "(18) \"Chief Executive Officer\" means an officer of a company, who has been designated as such by it;",
+        "index": 11
+      },
+      {
+        "marker": "def-chief-financial-officer",
+        "uid": "def-chief-financial-officer",
+        "type": "Definition",
+        "text_excerpt": "(19) \"Chief Financial Officer\" means a person appointed as the Chief Financial Officer of a company; (20) \"company\" means a company incorporated under this Act or under any previous company law; (21) ",
+        "index": 12
+      },
+      {
+        "marker": "def-company-limited-by-shares",
+        "uid": "def-company-limited-by-shares",
+        "type": "Definition",
+        "text_excerpt": "(22) \"company limited by shares\" means a company having the liability of its members limited by the memorandum to the amount, if any, unpaid on the shares respectively held by them;",
+        "index": 13
+      },
+      {
+        "marker": "def-company-liquidator",
+        "uid": "def-company-liquidator",
+        "type": "Definition",
+        "text_excerpt": "(23) \"Company Liquidator\" means a person appointed by the Tribunal as the Company Liquidator in accordance with the provisions of section 275 for the winding up of a company under this Act;",
+        "index": 14
+      },
+      {
+        "marker": "def-company-secretary-in-practice",
+        "uid": "def-company-secretary-in-practice",
+        "type": "Definition",
+        "text_excerpt": "(25) \"company secretary in practice\" means a company secretary who is deemed to be in practice under sub-section (2) of section 2 of the Company Secretaries Act, 1980 (56 of 1980);",
+        "index": 15
+      },
+      {
+        "marker": "def-contributory",
+        "uid": "def-contributory",
+        "type": "Definition",
+        "text_excerpt": "(26) \"contributory\" means a person liable to contribute towards the assets of the company in the event of its being wound up.",
+        "index": 16
+      },
+      {
+        "marker": "def-control",
+        "uid": "def-control",
+        "type": "Definition",
+        "text_excerpt": "(27) \"control\" shall include the right to appoint majority of the directors or to control the management or policy decisions exercisable by a person or persons acting individually or in concert, direc",
+        "index": 17
+      },
+      {
+        "marker": "def-cost-accountant",
+        "uid": "def-cost-accountant",
+        "type": "Definition",
+        "text_excerpt": "(28) \"Cost Accountant\" means a cost accountant as defined in clause (b) of sub-section (1) of section 2 of the Cost and Works Accountants Act, 1959 (23 of 1959) and who holds a valid certificate of pr",
+        "index": 18
+      },
+      {
+        "marker": "def-court",
+        "uid": "def-court",
+        "type": "Definition",
+        "text_excerpt": "(29) \"court\" means--",
+        "index": 19
+      },
+      {
+        "marker": "def-debenture",
+        "uid": "def-debenture",
+        "type": "Definition",
+        "text_excerpt": "(30) \"debenture\" includes debenture stock, bonds or any other instrument of a company evidencing a debt, whether constituting a charge on the assets of the company or not: Provided that--",
+        "index": 20
+      },
+      {
+        "marker": "def-deposit",
+        "uid": "def-deposit",
+        "type": "Definition",
+        "text_excerpt": "(31) \"deposit\" includes any receipt of money by way of deposit or loan or in any other form by a company, but does not include such categories of amount as may be prescribed in consultation with the R",
+        "index": 21
+      },
+      {
+        "marker": "def-depository",
+        "uid": "def-depository",
+        "type": "Definition",
+        "text_excerpt": "(32) \"depository\" means a depository as defined in clause (e) of sub-section (1) of section 2 of the Depositories Act, 1996 (22 of 1996);",
+        "index": 22
+      },
+      {
+        "marker": "def-derivative",
+        "uid": "def-derivative",
+        "type": "Definition",
+        "text_excerpt": "(33) \"derivative\" means the derivative as defined in clause (ac) of section 2 of the Securities Contracts (Regulation) Act, 1956 (42 of 1956);",
+        "index": 23
+      },
+      {
+        "marker": "def-director",
+        "uid": "def-director",
+        "type": "Definition",
+        "text_excerpt": "(34) \"director\" means a director appointed to the Board of a company;",
+        "index": 24
+      },
+      {
+        "marker": "def-dividend",
+        "uid": "def-dividend",
+        "type": "Definition",
+        "text_excerpt": "(35) \"dividend\" includes any interim dividend;",
+        "index": 25
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 1,
+      "latency_ms": 27790.56,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "expects_list": true
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 27.79058003425598
+  },
+  "SE-011": {
+    "question": "Explain Section 166 duties of directors",
+    "category": "structured_explanation",
+    "answer": "Section 166 outlines the duties of directors [sec-166].\n\nSpecifically:\n*   **Compliance with Articles** A director must act in accordance with the company's articles, subject to the provisions of the Act [sec-166].\n*   **Good Faith and Company Interests** Directors are required to act in good faith to promote the company's objects for the benefit of its members as a whole, and in the best interests of the company, its employees, shareholders, the community, and for environmental protection [sec-166-ss-2].\n*   **Care, Skill, Diligence, and Independent Judgment** Directors must exercise their duties with due and reasonable care, skill, and diligence, and must exercise independent judgment [sec-166-ss-3].\n*   **Avoidance of Conflict of Interest** A director shall not engage in situations where they may have a direct or indirect interest that conflicts, or potentially conflicts, with the company's interests [sec-166-ss-4].\n*   **Prohibition of Undue Gain** Directors are prohibited from achieving or attempting to achieve any undue gain or advantage for themselves, their relatives, partners, or associates. If found guilty of making an undue gain, the director is liable to pay an amount equal to that gain to the company [sec-166-ss-5].\n*   **Non-Assignment of Office** A director cannot assign their office, and any such assignment is void [sec-166-ss-6].\n*   **Penalties for Contravention** Contravention of the provisions of this section by a director is punishable with a fine ranging from not less than one lakh rupees to five lakh rupees [sec-166-ss-7].",
+    "cypher": "MATCH (s:Section {number: 166})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(scl)\nOPTIONAL MATCH (ss)-[:HAS_PROVISO]->(p)\nOPTIONAL MATCH (ss)-[:HAS_EXPLANATION]->(e)\nRETURN\n    s.uid,\n    s.title,\n    s.text,\n    collect(DISTINCT {uid: ss.uid, number: ss.number, text: ss.text}) AS subsections,\n    collect(DISTINCT {uid: cl.uid, label: cl.label, text: cl.text}) AS clauses,\n    collect(DISTINCT {uid: scl.uid, label: scl.label, text: scl.text}) AS subclauses,\n    collect(DISTINCT {uid: p.uid, text: p.text}) AS provisos,\n    collect(DISTINCT {uid: e.uid, text: e.text}) AS explanations",
+    "sources": [
+      {
+        "uid": "sec-166",
+        "type": "Section",
+        "text_excerpt": "166. Duties of directors.--(1) Subject to the provisions of this Act, a director of a company shall act in accordance with the articles of the company. 1. The proviso ins. by Act 1 of 2018, s. 52 (w.e"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-166",
+        "uid": "sec-166",
+        "type": "Section",
+        "text_excerpt": "166. Duties of directors.--(1) Subject to the provisions of this Act, a director of a company shall act in accordance with the articles of the company. 1. The proviso ins. by Act 1 of 2018, s. 52 (w.e",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 3,
+      "latency_ms": 47712.69,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 166
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 47.71269989013672
+  },
+  "SE-012": {
+    "question": "What is the penalty under Section 448?",
+    "category": "structured_explanation",
+    "answer": "Based on the provided graph results, the specific penalty details, including monetary amounts or imprisonment terms, for a false statement under Section 448 are not available in the text provided [sec-448]. The section describes the conditions under which a false statement is made but does not specify the resulting punishment.",
+    "cypher": "MATCH (s:Section {number: 448}) OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) RETURN s.uid, s.title, s.text, collect(DISTINCT ss.text) AS subsections, collect(DISTINCT cl.text) AS clauses, collect(DISTINCT sc.text) AS subclauses",
+    "sources": [
+      {
+        "uid": "sec-448",
+        "type": "Section",
+        "text_excerpt": "448. Punishment for false statement.-- Save as otherwise provided in this Act, if in any return, report, certificate, financial statement, prospectus, statement or other document required by, or for, "
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-448",
+        "uid": "sec-448",
+        "type": "Section",
+        "text_excerpt": "448. Punishment for false statement.-- Save as otherwise provided in this Act, if in any return, report, certificate, financial statement, prospectus, statement or other document required by, or for, ",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 6876.09,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 448,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 6.876103162765503
+  },
+  "SE-013": {
+    "question": "Explain the provisions of Section 186 on loans and investments",
+    "category": "structured_explanation",
+    "answer": "Section 186, titled \"Loan and investment by company\" [sec-186], outlines provisions regarding a company's investment activities.\n\nSubsection (1) states that, without prejudice to other provisions of the Act and unless otherwise prescribed, a company shall make investments through not more than two layers of investment companies [sec-186]. A proviso to this sub-section specifies that its provisions shall not affect certain matters [sec-186-proviso-1].\n\nSubsection (10) details that the register referred to in sub-section (9) shall be kept at... [sec-186-ss-10]. This subsection includes specific provisions:\n(i) concerning investments made by an investment company [sec-186-ss-10-cl-i];\n    (ii) concerning investments made in shares allotted in pursuance of clause (a) of sub-section (1) of section 62 or in shares allotted in pursuance of rights issues made by a body corporate [sec-186-ss-10-cl-i-sc-ii]; and\n    (iii) concerning investments or lending activities made by a non-banking financial company registered under Chapter III-B of the Reserve Bank of India Act, 1934 (2 of 1934), whose principal business is the acquisition of securities [sec-186-ss-10-cl-i-sc-iii].",
+    "cypher": "MATCH (s:Section {number: 186})\n\n// Collect section-level provisos\nOPTIONAL MATCH (s)-[:HAS_PROVISO]->(p_s)\nWITH s, COLLECT(DISTINCT {uid: p_s.uid, text: p_s.text}) AS section_provisos_raw\n// Collect section-level explanations\nOPTIONAL MATCH (s)-[:HAS_EXPLANATION]->(e_s)\nWITH s, section_provisos_raw, COLLECT(DISTINCT {uid: e_s.uid, text: e_s.text}) AS section_explanations_raw\n\n// Filter out nulls from section-level collections\nWITH s,\n     [item IN section_provisos_raw WHERE item.uid IS NOT NULL | item] AS section_provisos,\n     [item IN section_explanations_raw WHERE item.uid IS NOT NULL | item] AS section_explanations\n\n// Match subsections and their descendants\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss)\nOPTIONAL MATCH (ss)-[:HAS_PROVISO]->(p_ss)\nOPTIONAL MATCH (ss)-[:HAS_EXPLANATION]->(e_ss)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(scl)\n\n// Stage 1: Collect subclauses for each clause, ordered\nWITH s, section_provisos, section_explanations, ss, p_ss, e_ss, cl, scl\nWHERE scl IS NOT NULL // Filter out null subclauses before ordering/collecting\nORDER BY scl.label\nWITH s, section_provisos, section_explanations, ss, p_ss, e_ss, cl,\n     COLLECT(DISTINCT {uid: scl.uid, label: scl.label, text: scl.text}) AS subclauses_for_clause\n\n// Stage 2: Collect clauses (with subclauses) for each subsection, ordered\n// Also collect subsection-level provisos and explanations\nWITH s, section_provisos, section_explanations, ss, p_ss, e_ss, cl, subclauses_for_clause\nWHERE cl IS NOT NULL // Filter out null clauses before ordering/collecting\nORDER BY cl.label\nWITH s, section_provisos, section_explanations, ss, p_ss, e_ss,\n     COLLECT(DISTINCT {uid: cl.uid, label: cl.label, text: cl.text, subclauses: subclauses_for_clause}) AS clauses_for_subsection_raw,\n     COLLECT(DISTINCT {uid: p_ss.uid, text: p_ss.text}) AS subsection_provisos_raw,\n     COLLECT(DISTINCT {uid: e_ss.uid, text: e_ss.text}) AS subsection_explanations_raw\n\n// Filter out nulls from subsection-level collections\nWITH s, section_provisos, section_explanations, ss,\n     [item IN clauses_for_subsection_raw WHERE item.uid IS NOT NULL | item] AS clauses_for_subsection,\n     [item IN subsection_provisos_raw WHERE item.uid IS NOT NULL | item] AS subsection_provisos,\n     [item IN subsection_explanations_raw WHERE item.uid IS NOT NULL | item] AS subsection_explanations\n\n// Stage 3: Collect subsections (with clauses, provisos, explanations) for the section, ordered\nWITH s, section_provisos, section_explanations, ss, clauses_for_subsection, subsection_provisos, subsection_explanations\nWHERE ss IS NOT NULL // Filter out null subsections before ordering/collecting\nORDER BY ss.number\nWITH s, section_provisos, section_explanations,\n     COLLECT(DISTINCT {\n         uid: ss.uid,\n         number: ss.number,\n         text: ss.text,\n         provisos: subsection_provisos,\n         explanations: subsection_explanations,\n         clauses: clauses_for_subsection\n     }) AS subsections_for_section\n\nRETURN s.uid, s.title, s.text,\n       section_provisos,\n       section_explanations,\n       subsections_for_section",
+    "sources": [
+      {
+        "uid": "sec-186",
+        "type": "Section",
+        "text_excerpt": "186. Loan and investment by company.--(1) Without prejudice to the provisions contained in this Act, a company shall unless otherwise prescribed, make investment through not more than two layers of in"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-186",
+        "uid": "sec-186",
+        "type": "Section",
+        "text_excerpt": "186. Loan and investment by company.--(1) Without prejudice to the provisions contained in this Act, a company shall unless otherwise prescribed, make investment through not more than two layers of in",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 66811.57,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 186
+    },
+    "status": "TIMEOUT",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 66.81158971786499
+  },
+  "SE-014": {
+    "question": "What are the penalties for non-compliance with Section 134?",
+    "category": "structured_explanation",
+    "answer": "For non-compliance with Section 134, the following penalties apply:\n\n*   If a company is in default in complying with the provisions of this section, the company shall be **liable** to a **penalty** of three lakh rupees [sec-134].\n*   Every officer of the company who is in default shall be **liable** to a **penalty** of fifty thousand rupees [sec-134].",
+    "cypher": "MATCH (s:Section {number: 134}) OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) WHERE s.text CONTAINS 'penalty' OR s.text CONTAINS 'liable' OR s.text CONTAINS 'fine' OR s.text CONTAINS 'punishment' OR ss.text CONTAINS 'penalty' OR ss.text CONTAINS 'liable' OR ss.text CONTAINS 'fine' OR ss.text CONTAINS 'punishment' OR cl.text CONTAINS 'penalty' OR cl.text CONTAINS 'liable' OR cl.text CONTAINS 'fine' OR cl.text CONTAINS 'punishment' OR sc.text CONTAINS 'penalty' OR sc.text CONTAINS 'liable' OR sc.text CONTAINS 'fine' OR sc.text CONTAINS 'punishment' RETURN s.uid, s.title, s.text, collect(DISTINCT ss.text) AS subsections, collect(DISTINCT cl.text) AS clauses, collect(DISTINCT sc.text) AS subclauses",
+    "sources": [
+      {
+        "uid": "sec-134",
+        "type": "Section",
+        "text_excerpt": "134. Financial statement, Board's report, etc.--(1) The financial statement, including consolidated financial statement, if any, shall be approved by the Board of Directors before they are signed on b"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-134",
+        "uid": "sec-134",
+        "type": "Section",
+        "text_excerpt": "134. Financial statement, Board's report, etc.--(1) The financial statement, including consolidated financial statement, if any, shall be approved by the Board of Directors before they are signed on b",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 6325.58,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 134,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 6.325588226318359
+  },
+  "SE-015": {
+    "question": "Explain Section 173 about board meetings",
+    "category": "structured_explanation",
+    "answer": "Section 173 of the Companies Act, titled \"Meetings of Board,\" outlines the requirements for board meetings [sec-173].\n\n**Key Provisions:**\n\n*   **Frequency of Meetings** Every company must hold its first Board of Directors meeting within thirty days of incorporation. Subsequently, a minimum of four board meetings must be held each year, ensuring that no more than one hundred and twenty days elapse between two consecutive meetings [sec-173].\n*   **Mode of Participation** Directors may participate in board meetings either in person or through video conferencing or other prescribed audio-visual means. These means must be capable of recording and recognizing director participation, and of recording and storing meeting proceedings along with the date and time [sec-173-ss-2].\n    *   The Central Government may specify certain matters that cannot be dealt with through video conferencing or other audio-visual means [sec-173-ss-2-proviso-1].\n    *   If a quorum is met by the physical presence of directors, any other director may participate via video conferencing or other audio-visual means for matters specified under the first proviso [sec-173-ss-2-proviso-2].\n*   **Notice for Meetings** A board meeting requires at least seven days' written notice to every director at their registered address with the company. This notice can be sent by hand delivery, post, or electronic means [sec-173-ss-3].\n    *   A meeting may be called with shorter notice for urgent business, provided at least one independent director, if any, is present [sec-173-ss-3-proviso-1].\n    *   If independent directors are absent from such a shorter notice meeting, decisions taken are final only upon ratification by at least one independent director, if any, after circulation to all directors [sec-173-ss-3-proviso-2].\n    *   This subsection and Section 174 do not apply to a One Person Company with only one director on its Board [sec-173-ss-3-proviso-3].\n*   **Penalty for Non-Compliance** Any officer whose duty it is to give notice under this section and who fails to do so is liable to a penalty of twenty-five thousand rupees [sec-173-ss-4].\n*   **Exemptions for Certain Companies** A One Person Company, small company, and dormant company are deemed to have complied with this section if at least one Board of Directors meeting has been conducted in each half of a calendar year, with a gap of not less than ninety days between the two meetings [sec-173-ss-5].\n    *   This subsection and Section 174 do not apply to a One Person Company with only one director on its Board [sec-173-ss-5-proviso-1].",
+    "cypher": "MATCH (s:Section {number: 173})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss)\nOPTIONAL MATCH (ss)-[:HAS_PROVISO]->(p_ss)\nOPTIONAL MATCH (ss)-[:HAS_EXPLANATION]->(e_ss)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl)\nOPTIONAL MATCH (cl)-[:HAS_PROVISO]->(p_cl)\nOPTIONAL MATCH (cl)-[:HAS_EXPLANATION]->(e_cl)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(scl)\nRETURN\n    s.uid,\n    s.title,\n    s.text,\n    collect(DISTINCT {\n        uid: ss.uid,\n        number: ss.number,\n        text: ss.text\n    }) AS subsections,\n    collect(DISTINCT {\n        uid: cl.uid,\n        parent_uid: ss.uid,\n        label: cl.label,\n        text: cl.text\n    }) AS clauses,\n    collect(DISTINCT {\n        uid: scl.uid,\n        parent_uid: cl.uid,\n        label: scl.label,\n        text: scl.text\n    }) AS subclauses,\n    collect(DISTINCT {\n        uid: p_ss.uid,\n        parent_uid: ss.uid,\n        text: p_ss.text\n    }) AS subsection_provisos,\n    collect(DISTINCT {\n        uid: e_ss.uid,\n        parent_uid: ss.uid,\n        text: e_ss.text\n    }) AS subsection_explanations,\n    collect(DISTINCT {\n        uid: p_cl.uid,\n        parent_uid: cl.uid,\n        text: p_cl.text\n    }) AS clause_provisos,\n    collect(DISTINCT {\n        uid: e_cl.uid,\n        parent_uid: cl.uid,\n        text: e_cl.text\n    }) AS clause_explanations",
+    "sources": [
+      {
+        "uid": "sec-173",
+        "type": "Section",
+        "text_excerpt": "173. Meetings of Board.--(1) Every company shall hold the first meeting of the Board of Directors within thirty days of the date of its incorporation and thereafter hold a minimum number of four meeti"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-173",
+        "uid": "sec-173",
+        "type": "Section",
+        "text_excerpt": "173. Meetings of Board.--(1) Every company shall hold the first meeting of the Board of Directors within thirty days of the date of its incorporation and thereafter hold a minimum number of four meeti",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 24601.1,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 173
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 24.60111904144287
+  },
+  "SE-016": {
+    "question": "What does Section 188 say about related party transactions?",
+    "category": "structured_explanation",
+    "answer": "Section 188, titled \"Related party transactions,\" outlines the regulations concerning contracts and arrangements between a company and its related parties [sec-188].\n\n**Core Requirement:**\nA company is prohibited from entering into any contract or arrangement with a related party without the consent of its Board of Directors, given by a resolution at a Board meeting, and subject to prescribed conditions [sec-188].\n\n**Provisos and Exceptions:**\n*   For companies with a paid-up share capital or transactions exceeding prescribed amounts, prior approval by a company resolution is required [sec-188].\n*   A related party member is barred from voting on such a resolution [sec-188]. However, this voting restriction does not apply if 90% or more of the company's members are relatives of promoters or are related parties [sec-188].\n*   The provisions of this sub-section do not apply to transactions entered into by the company in its ordinary course of business, unless such transactions are not on an arm's length basis [sec-188].\n*   The requirement for a resolution under the first proviso is not applicable for transactions between a holding company and its wholly-owned subsidiary, provided their accounts are consolidated with the holding company and presented to shareholders for approval [sec-188].\n\n**Reporting and Consequences of Non-Compliance:**\n*   Every contract or arrangement entered into under subsection (1) must be disclosed in the Board's report to shareholders, along with a justification [sec-188].\n*   If a director or employee enters into such a contract without the required Board consent or general meeting approval, and it is not ratified within three months, the contract becomes voidable at the option of the Board or shareholders [sec-188].\n*   If the contract involves a related party to any director, or is authorized by another director, the concerned directors must indemnify the company against any incurred loss [sec-188].\n*   The company may also proceed against a director or employee who contravened these provisions to recover any sustained loss [sec-188].\n\n**Penalties:**\nAny director or employee who enters into or authorizes a contract or arrangement in violation of Section 188 is liable to a penalty [sec-188]:\n*   For a listed company, the penalty is twenty-five lakh rupees [sec-188].\n*   For any other company, the penalty is five lakh rupees [sec-188].\n\nAn explanation is provided within this sub-section [sec-188].",
+    "cypher": "MATCH (s:Section {number: 188})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc)\nOPTIONAL MATCH (s)-[:HAS_PROVISO]->(p)\nOPTIONAL MATCH (s)-[:HAS_EXPLANATION]->(e)\nRETURN\n    s.uid, s.title, s.text,\n    collect(DISTINCT {uid: ss.uid, number: ss.number, text: ss.text}) AS subsections,\n    collect(DISTINCT {uid: cl.uid, label: cl.label, text: cl.text}) AS clauses,\n    collect(DISTINCT {uid: sc.uid, label: sc.label, text: sc.text}) AS subclauses,\n    collect(DISTINCT {uid: p.uid, text: p.text}) AS provisos,\n    collect(DISTINCT {uid: e.uid, text: e.text}) AS explanations",
+    "sources": [
+      {
+        "uid": "sec-188",
+        "type": "Section",
+        "text_excerpt": "188. Related party transactions.-- (1) Except with the consent of the Board of Directors given by a resolution at a meeting of the Board and subject to such conditions as may be prescribed, no company"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-188",
+        "uid": "sec-188",
+        "type": "Section",
+        "text_excerpt": "188. Related party transactions.-- (1) Except with the consent of the Board of Directors given by a resolution at a meeting of the Board and subject to such conditions as may be prescribed, no company",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 1,
+      "latency_ms": 10521.54,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 188
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 10.52155089378357
+  },
+  "SE-017": {
+    "question": "Explain the penalty provisions in Section 129",
+    "category": "structured_explanation",
+    "answer": "Section 129 details the penalty provisions for contravention of its requirements [sec-129].\n\nIf a company contravenes the provisions of Section 129, the managing director, the whole-time director in charge of finance, the Chief Financial Officer, or any other person charged by the Board with the duty of complying with the requirements of this section, and in the absence of any of these officers, all the directors, shall be punishable [sec-129].\n\nOriginally, such persons were punishable with imprisonment for a term which may extend to one year or with a fine which shall not be less than fifty thousand rupees but which may extend to five lakh rupees, or with both [sec-129].\n\nHowever, by Act 29 of 2020, the words \"with imprisonment for a term which may extend to one year or\" and the words \"or with both\" were omitted (effective from 21-12-2020) [sec-129].\n\nTherefore, as amended, the penalty for contravention is a fine which shall not be less than fifty thousand rupees but which may extend to five lakh rupees [sec-129].",
+    "cypher": "MATCH (s:Section {number: 129}) OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) WHERE toLower(s.text) CONTAINS 'penalty' OR toLower(s.text) CONTAINS 'fine' OR toLower(s.text) CONTAINS 'liable' OR toLower(s.text) CONTAINS 'punishment' OR toLower(ss.text) CONTAINS 'penalty' OR toLower(ss.text) CONTAINS 'fine' OR toLower(ss.text) CONTAINS 'liable' OR toLower(ss.text) CONTAINS 'punishment' OR toLower(cl.text) CONTAINS 'penalty' OR toLower(cl.text) CONTAINS 'fine' OR toLower(cl.text) CONTAINS 'liable' OR toLower(cl.text) CONTAINS 'punishment' OR toLower(sc.text) CONTAINS 'penalty' OR toLower(sc.text) CONTAINS 'fine' OR toLower(sc.text) CONTAINS 'liable' OR toLower(sc.text) CONTAINS 'punishment' RETURN s.uid, s.title, s.text, collect(DISTINCT ss.text) AS subsections, collect(DISTINCT cl.text) AS clauses, collect(DISTINCT sc.text) AS subclauses",
+    "sources": [
+      {
+        "uid": "sec-129",
+        "type": "Section",
+        "text_excerpt": "129. Financial statement.--(1) The financial statements shall give a true and fair view of the state of affairs of the company or companies, comply with the accounting standards notified under section"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-129",
+        "uid": "sec-129",
+        "type": "Section",
+        "text_excerpt": "129. Financial statement.--(1) The financial statements shall give a true and fair view of the state of affairs of the company or companies, comply with the accounting standards notified under section",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 11214.33,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 129,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 11.21435022354126
+  },
+  "SE-018": {
+    "question": "What is the structure of Chapter XII?",
+    "category": "structured_explanation",
+    "answer": "Chapter XII, titled \"MEETINGS OF BOARD AND ITS POWERS\" [ch-XII], comprises the following sections:\n*   Section 173: Meetings of Board [sec-173]\n*   Section 174: Quorum for meetings of Board [sec-174]\n*   Section 175: Passing of resolution by circulation [sec-175]\n*   Section 176: Defects in appointment of directors not to invalidate actions taken [sec-176]\n*   Section 177: Audit committee [sec-177]\n*   Section 178: Nomination and Remuneration Committee and Stakeholders Relationship Committee [sec-178]\n*   Section 179: Powers of Board [sec-179]\n*   Section 180: Restrictions on powers of Board [sec-180]\n*   Section 181: Company to contribute to bona fide and charitable funds, etc [sec-181]\n*   Section 182: Prohibitions and restrictions regarding political contributions [sec-182]\n*   Section 183: Power of Board and other persons to make contributions to national defence fund, etc [sec-183]\n*   Section 184: Disclosure of interest by director [sec-184]\n*   Section 185: Loans to directors, etc [sec-185]\n*   Section 186: Loan and investment by company [sec-186]\n*   Section 187: Investments of company to be held in its own name [sec-187]\n*   Section 188: Related party transactions [sec-188]\n*   Section 189: Register of contracts or arrangements in which directors are interested [sec-189]\n*   Section 190: Contract of employment with managing or whole-time directors [sec-190]\n*   Section 191: Payment to director for loss of office, etc., in connection with transfer of undertaking, property or shares [sec-191]\n*   Section 192: Restriction on non-cash transactions involving directors [sec-192]\n*   Section 193: 192. Restriction on non-cash transactions involving directors.--(1) No company shall enter into an arrangement by which-- [sec-193]\n*   Section 194: [Omitted [sec-194]\n*   Section 195: [Prohibition on insider trading of securities. Omitted by s. 65, ibid [sec-195]",
+    "cypher": "MATCH (c:Chapter {number: 'XII'})-[:HAS_SECTION]->(s:Section) RETURN c.uid, c.number, c.title, s.uid, s.number, s.title ORDER BY s.number LIMIT 25",
+    "sources": [
+      {
+        "uid": "ch-XII",
+        "type": "Chapter",
+        "text_excerpt": "MEETINGS OF BOARD AND ITS POWERS"
+      },
+      {
+        "uid": "sec-173",
+        "type": "Section",
+        "text_excerpt": "Meetings of Board"
+      },
+      {
+        "uid": "sec-174",
+        "type": "Section",
+        "text_excerpt": "Quorum for meetings of Board"
+      },
+      {
+        "uid": "sec-175",
+        "type": "Section",
+        "text_excerpt": "Passing of resolution by circulation"
+      },
+      {
+        "uid": "sec-176",
+        "type": "Section",
+        "text_excerpt": "Defects in appointment of directors not to invalidate actions taken"
+      },
+      {
+        "uid": "sec-177",
+        "type": "Section",
+        "text_excerpt": "Audit committee"
+      },
+      {
+        "uid": "sec-178",
+        "type": "Section",
+        "text_excerpt": "Nomination and Remuneration Committee and Stakeholders Relationship Committee"
+      },
+      {
+        "uid": "sec-179",
+        "type": "Section",
+        "text_excerpt": "Powers of Board"
+      },
+      {
+        "uid": "sec-180",
+        "type": "Section",
+        "text_excerpt": "Restrictions on powers of Board"
+      },
+      {
+        "uid": "sec-181",
+        "type": "Section",
+        "text_excerpt": "Company to contribute to bona fide and charitable funds, etc"
+      },
+      {
+        "uid": "sec-182",
+        "type": "Section",
+        "text_excerpt": "Prohibitions and restrictions regarding political contributions"
+      },
+      {
+        "uid": "sec-183",
+        "type": "Section",
+        "text_excerpt": "Power of Board and other persons to make contributions to national defence fund, etc"
+      },
+      {
+        "uid": "sec-184",
+        "type": "Section",
+        "text_excerpt": "Disclosure of interest by director"
+      },
+      {
+        "uid": "sec-185",
+        "type": "Section",
+        "text_excerpt": "Loans to directors, etc"
+      },
+      {
+        "uid": "sec-186",
+        "type": "Section",
+        "text_excerpt": "Loan and investment by company"
+      },
+      {
+        "uid": "sec-187",
+        "type": "Section",
+        "text_excerpt": "Investments of company to be held in its own name"
+      },
+      {
+        "uid": "sec-188",
+        "type": "Section",
+        "text_excerpt": "Related party transactions"
+      },
+      {
+        "uid": "sec-189",
+        "type": "Section",
+        "text_excerpt": "Register of contracts or arrangements in which directors are interested"
+      },
+      {
+        "uid": "sec-190",
+        "type": "Section",
+        "text_excerpt": "Contract of employment with managing or whole-time directors"
+      },
+      {
+        "uid": "sec-191",
+        "type": "Section",
+        "text_excerpt": "Payment to director for loss of office, etc., in connection with transfer of undertaking, property or shares"
+      },
+      {
+        "uid": "sec-192",
+        "type": "Section",
+        "text_excerpt": "Restriction on non-cash transactions involving directors"
+      },
+      {
+        "uid": "sec-193",
+        "type": "Section",
+        "text_excerpt": "192. Restriction on non-cash transactions involving directors.--(1) No company shall enter into an arrangement by which--"
+      },
+      {
+        "uid": "sec-194",
+        "type": "Section",
+        "text_excerpt": "[Omitted"
+      },
+      {
+        "uid": "sec-195",
+        "type": "Section",
+        "text_excerpt": "[Prohibition on insider trading of securities. Omitted by s. 65, ibid"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "ch-XII",
+        "uid": "ch-XII",
+        "type": "Chapter",
+        "text_excerpt": "MEETINGS OF BOARD AND ITS POWERS",
+        "index": 1
+      },
+      {
+        "marker": "sec-173",
+        "uid": "sec-173",
+        "type": "Section",
+        "text_excerpt": "Meetings of Board",
+        "index": 2
+      },
+      {
+        "marker": "sec-174",
+        "uid": "sec-174",
+        "type": "Section",
+        "text_excerpt": "Quorum for meetings of Board",
+        "index": 3
+      },
+      {
+        "marker": "sec-175",
+        "uid": "sec-175",
+        "type": "Section",
+        "text_excerpt": "Passing of resolution by circulation",
+        "index": 4
+      },
+      {
+        "marker": "sec-176",
+        "uid": "sec-176",
+        "type": "Section",
+        "text_excerpt": "Defects in appointment of directors not to invalidate actions taken",
+        "index": 5
+      },
+      {
+        "marker": "sec-177",
+        "uid": "sec-177",
+        "type": "Section",
+        "text_excerpt": "Audit committee",
+        "index": 6
+      },
+      {
+        "marker": "sec-178",
+        "uid": "sec-178",
+        "type": "Section",
+        "text_excerpt": "Nomination and Remuneration Committee and Stakeholders Relationship Committee",
+        "index": 7
+      },
+      {
+        "marker": "sec-179",
+        "uid": "sec-179",
+        "type": "Section",
+        "text_excerpt": "Powers of Board",
+        "index": 8
+      },
+      {
+        "marker": "sec-180",
+        "uid": "sec-180",
+        "type": "Section",
+        "text_excerpt": "Restrictions on powers of Board",
+        "index": 9
+      },
+      {
+        "marker": "sec-181",
+        "uid": "sec-181",
+        "type": "Section",
+        "text_excerpt": "Company to contribute to bona fide and charitable funds, etc",
+        "index": 10
+      },
+      {
+        "marker": "sec-182",
+        "uid": "sec-182",
+        "type": "Section",
+        "text_excerpt": "Prohibitions and restrictions regarding political contributions",
+        "index": 11
+      },
+      {
+        "marker": "sec-183",
+        "uid": "sec-183",
+        "type": "Section",
+        "text_excerpt": "Power of Board and other persons to make contributions to national defence fund, etc",
+        "index": 12
+      },
+      {
+        "marker": "sec-184",
+        "uid": "sec-184",
+        "type": "Section",
+        "text_excerpt": "Disclosure of interest by director",
+        "index": 13
+      },
+      {
+        "marker": "sec-185",
+        "uid": "sec-185",
+        "type": "Section",
+        "text_excerpt": "Loans to directors, etc",
+        "index": 14
+      },
+      {
+        "marker": "sec-186",
+        "uid": "sec-186",
+        "type": "Section",
+        "text_excerpt": "Loan and investment by company",
+        "index": 15
+      },
+      {
+        "marker": "sec-187",
+        "uid": "sec-187",
+        "type": "Section",
+        "text_excerpt": "Investments of company to be held in its own name",
+        "index": 16
+      },
+      {
+        "marker": "sec-188",
+        "uid": "sec-188",
+        "type": "Section",
+        "text_excerpt": "Related party transactions",
+        "index": 17
+      },
+      {
+        "marker": "sec-189",
+        "uid": "sec-189",
+        "type": "Section",
+        "text_excerpt": "Register of contracts or arrangements in which directors are interested",
+        "index": 18
+      },
+      {
+        "marker": "sec-190",
+        "uid": "sec-190",
+        "type": "Section",
+        "text_excerpt": "Contract of employment with managing or whole-time directors",
+        "index": 19
+      },
+      {
+        "marker": "sec-191",
+        "uid": "sec-191",
+        "type": "Section",
+        "text_excerpt": "Payment to director for loss of office, etc., in connection with transfer of undertaking, property or shares",
+        "index": 20
+      },
+      {
+        "marker": "sec-192",
+        "uid": "sec-192",
+        "type": "Section",
+        "text_excerpt": "Restriction on non-cash transactions involving directors",
+        "index": 21
+      },
+      {
+        "marker": "sec-193",
+        "uid": "sec-193",
+        "type": "Section",
+        "text_excerpt": "192. Restriction on non-cash transactions involving directors.--(1) No company shall enter into an arrangement by which--",
+        "index": 22
+      },
+      {
+        "marker": "sec-194",
+        "uid": "sec-194",
+        "type": "Section",
+        "text_excerpt": "[Omitted",
+        "index": 23
+      },
+      {
+        "marker": "sec-195",
+        "uid": "sec-195",
+        "type": "Section",
+        "text_excerpt": "[Prohibition on insider trading of securities. Omitted by s. 65, ibid",
+        "index": 24
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 1,
+      "latency_ms": 10512.64,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "chapter": "XII"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 10.512653112411499
+  },
+  "SE-019": {
+    "question": "Explain Section 143 on auditor powers and duties",
+    "category": "structured_explanation",
+    "answer": "Section 143 of the Companies Act, titled \"Powers and duties of auditors and auditing standards,\" outlines the responsibilities and rights of company auditors [sec-143].\n\n**Auditor's Rights and General Duties:**\nAn auditor has the right to access the company's books of account and vouchers at all times, regardless of their location. They are entitled to request necessary information and explanations from company officers for performing their duties and must inquire into specific matters [sec-143].\n\n**Auditor's Report:**\nThe auditor must prepare a report for the company's members on the examined accounts and financial statements required to be laid before the general meeting. This report must consider the Act's provisions, accounting and auditing standards, and other specified matters, aiming to provide a true and fair view of the company's affairs, profit or loss, and cash flow [sec-143-ss-2]. The report must also state specific matters [sec-143-ss-3]. If any required matter in the report is answered negatively or with a qualification, the reasons must be stated [sec-143-ss-4].\n\n**Government Companies:**\nFor Government companies or those controlled by the Central or State Governments, the Comptroller and Auditor General of India (CAG) appoints the auditor and directs the audit process. The appointed auditor must submit a copy of the audit report to the CAG, including any directions issued and actions taken thereon [sec-143-ss-5]. The CAG has certain rights within sixty days of receiving this report [sec-143-ss-6]. Additionally, the CAG may order a test audit of such companies' accounts if deemed necessary, with the provisions of Section 19A of the Comptroller and Auditor-General's (Duties, Powers and Conditions of Service) Act, 1971, applying to the test audit report [sec-143-ss-7].\n\n**Branch Office Audit:**\nIf a company has a branch office, its accounts must be audited either by the company's auditor or another qualified person. For branch offices located outside India, the audit can be conducted by the company's auditor, an accountant, or any other person qualified under the laws of that country. The duties and powers of the company's auditor extend to the audit of the branch [sec-143-ss-8].\n\n**Auditing Standards:**\nEvery auditor must comply with auditing standards [sec-143-ss-9]. The Central Government may prescribe these standards or any addendum, based on recommendations from the Institute of Chartered Accountants of India, in consultation with the National Financial Reporting Authority [sec-143-ss-10]. The Central Government, in consultation with the National Financial Reporting Authority, may also direct that auditor's reports for specific classes of companies include statements on additional matters [sec-143-ss-11].\n\n**Reporting Fraud:**\nIf an auditor, during their duties, has reason to believe that fraud involving a prescribed amount is being or has been committed by the company's officers or employees, they must report the matter to the Central Government within a specified time and manner [sec-143-ss-12]. Reporting such matters in good faith does not constitute a contravention of the auditor's duty [sec-143-ss-13].\n\n**Applicability and Penalties:**\nThe provisions of this section apply mutatis mutandis to certain entities [sec-143-ss-14]. Non-compliance with the fraud reporting requirement under subsection (12) by an auditor, cost accountant, or company secretary in practice incurs a penalty of five lakh rupees for a listed company and one lakh rupees for any other company [sec-143-ss-15].",
+    "cypher": "MATCH (s:Section {number: 143})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss:SubSection)\nWITH s, ss ORDER BY ss.number\nRETURN s.uid, s.title, s.text, collect({uid: ss.uid, number: ss.number, text: ss.text}) AS subsections",
+    "sources": [
+      {
+        "uid": "sec-143",
+        "type": "Section",
+        "text_excerpt": "143. Powers and duties of auditors and auditing standards.--(1) Every auditor of a company shall have a right of access at all times to the books of account and vouchers of the company, whether kept a"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-143",
+        "uid": "sec-143",
+        "type": "Section",
+        "text_excerpt": "143. Powers and duties of auditors and auditing standards.--(1) Every auditor of a company shall have a right of access at all times to the books of account and vouchers of the company, whether kept a",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 23911.29,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 143
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 23.911319732666016
+  },
+  "SE-020": {
+    "question": "What penalty applies for non-compliance with Section 92?",
+    "category": "structured_explanation",
+    "answer": "Non-compliance with Section 92 carries the following penalties:\n\n1.  **Failure to file annual return:** If any company fails to file its annual return under sub-section (4) before the expiry of the specified period, such company and every officer who is in default shall be liable to a penalty of ten thousand rupees. In case of continuing failure, a further penalty of one hundred rupees for each day after the first during which such failure continues shall apply, subject to a maximum of two lakh rupees for the company and fifty thousand rupees for an officer who is in default [sec-92].\n2.  **Non-conforming certification by company secretary:** If a company secretary in practice certifies the annual return otherwise than in conformity with the requirements of Section 92 or the rules made thereunder, he shall be liable to a penalty of two lakh rupees [sec-92].\n3.  **Refusal or default in allowing extracts/copies:** For each default related to allowing extracts from any register, index, or return, or providing copies thereof, the company and every officer of the company who is in default shall be liable to a penalty of one thousand rupees for every day during which the refusal or default continues, subject to a maximum of one lakh rupees [sec-92].",
+    "cypher": "MATCH (s:Section {number: 92}) OPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss) OPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl) OPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc) OPTIONAL MATCH (r:Rule)-[:REFERS_TO|PRESCRIBES_FOR|DERIVED_RULE]->(s) RETURN s.uid, s.title, s.text, collect(DISTINCT ss.text) AS subsections, collect(DISTINCT cl.text) AS clauses, collect(DISTINCT sc.text) AS subclauses, collect(DISTINCT {rule_number: r.number, rule_text: r.text}) AS related_rules",
+    "sources": [
+      {
+        "uid": "sec-92",
+        "type": "Section",
+        "text_excerpt": "92. Annual return.--(1) Every company shall prepare a return (hereinafter referred to as the annual return) in the prescribed form containing the particulars as they stood on the close of the financia"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-92",
+        "uid": "sec-92",
+        "type": "Section",
+        "text_excerpt": "92. Annual return.--(1) Every company shall prepare a return (hereinafter referred to as the annual return) in the prescribed form containing the particulars as they stood on the close of the financia",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "penalty_query",
+      "retry_count": 1,
+      "latency_ms": 14763.49,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 92,
+      "expects_keyword": "penalty"
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 14.76350212097168
+  },
+  "SE-021": {
+    "question": "Explain Section 196 on appointment of managing director",
+    "category": "structured_explanation",
+    "answer": "Section 196 addresses the appointment of a managing director, whole-time director, or manager [sec-196]. The section is titled \"Appointment of managing director, whole-time director or manager\" [sec-196]. The text of the section states: \"196. Appointment of managing director, whole-time director or manager\" [sec-196].\n\nNo further details regarding subsections, clauses, subclauses, provisos, or explanations for Section 196 were found in the graph results.",
+    "cypher": "MATCH (s:Section {number: 196})\nOPTIONAL MATCH (s)-[:HAS_PROVISO]->(sp:Proviso)\nOPTIONAL MATCH (s)-[:HAS_EXPLANATION]->(se:Explanation)\nWITH s,\n     collect(DISTINCT {uid: sp.uid, text: sp.text}) AS section_provisos,\n     collect(DISTINCT {uid: se.uid, text: se.text}) AS section_explanations\n\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss:SubSection)\nOPTIONAL MATCH (ss)-[:HAS_PROVISO]->(ssp:Proviso)\nOPTIONAL MATCH (ss)-[:HAS_EXPLANATION]->(sse:Explanation)\nWITH s, section_provisos, section_explanations, ss,\n     collect(DISTINCT {uid: ssp.uid, text: ssp.text}) AS ss_provisos,\n     collect(DISTINCT {uid: sse.uid, text: sse.text}) AS ss_explanations\n\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl:Clause)\nOPTIONAL MATCH (cl)-[:HAS_PROVISO]->(clp:Proviso)\nOPTIONAL MATCH (cl)-[:HAS_EXPLANATION]->(cle:Explanation)\nWITH s, section_provisos, section_explanations, ss, ss_provisos, ss_explanations, cl,\n     collect(DISTINCT {uid: clp.uid, text: clp.text}) AS cl_provisos,\n     collect(DISTINCT {uid: cle.uid, text: cle.text}) AS cl_explanations\n\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc:SubClause)\nOPTIONAL MATCH (sc)-[:HAS_PROVISO]->(scp:Proviso)\nOPTIONAL MATCH (sc)-[:HAS_EXPLANATION]->(sce:Explanation)\nWITH s, section_provisos, section_explanations, ss, ss_provisos, ss_explanations, cl, cl_provisos, cl_explanations, sc,\n     collect(DISTINCT {uid: scp.uid, text: scp.text}) AS sc_provisos,\n     collect(DISTINCT {uid: sce.uid, text: sce.text}) AS sc_explanations\nORDER BY sc.label\n\n// Aggregate subclauses for each clause\nWITH s, section_provisos, section_explanations, ss, ss_provisos, ss_explanations, cl, cl_provisos, cl_explanations,\n     collect(DISTINCT CASE WHEN sc IS NOT NULL THEN {\n         uid: sc.uid,\n         label: sc.label,\n         text: sc.text,\n         provisos: sc_provisos,\n         explanations: sc_explanations\n     } ELSE NULL END) AS subclauses_raw\nWITH s, section_provisos, section_explanations, ss, ss_provisos, ss_explanations, cl, cl_provisos, cl_explanations,\n     [item IN subclauses_raw WHERE item IS NOT NULL] AS subclauses_data\nORDER BY cl.label, cl.uid\n\n// Aggregate clauses for each subsection\nWITH s, section_provisos, section_explanations, ss, ss_provisos, ss_explanations,\n     collect(DISTINCT CASE WHEN cl IS NOT NULL THEN {\n         uid: cl.uid,\n         label: cl.label,\n         text: cl.text,\n         provisos: cl_provisos,\n         explanations: cl_explanations,\n         subclauses: subclauses_data\n     } ELSE NULL END) AS clauses_raw\nWITH s, section_provisos, section_explanations, ss, ss_provisos, ss_explanations,\n     [item IN clauses_raw WHERE item IS NOT NULL] AS clauses_data\nORDER BY ss.number, ss.uid\n\n// Aggregate subsections for the section\nWITH s, section_provisos, section_explanations,\n     collect(DISTINCT CASE WHEN ss IS NOT NULL THEN {\n         uid: ss.uid,\n         number: ss.number,\n         text: ss.text,\n         provisos: ss_provisos,\n         explanations: ss_explanations,\n         clauses: clauses_data\n     } ELSE NULL END) AS subsections_raw\nRETURN\n    s.uid,\n    s.title,\n    s.text,\n    section_provisos,\n    section_explanations,\n    [item IN subsections_raw WHERE item IS NOT NULL] AS subsections",
+    "sources": [
+      {
+        "uid": "sec-196",
+        "type": "Section",
+        "text_excerpt": "196. Appointment of managing director, whole-time director or manager."
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-196",
+        "uid": "sec-196",
+        "type": "Section",
+        "text_excerpt": "196. Appointment of managing director, whole-time director or manager.",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 50497.69,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 196
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 50.4977240562439
+  },
+  "SE-022": {
+    "question": "What are the provisions of Section 197 on remuneration?",
+    "category": "structured_explanation",
+    "answer": "Section 197 of the Companies Act addresses overall maximum managerial remuneration and remuneration in cases of absence or inadequacy of profits [sec-197].\n\n**Key Provisions:**\n\n*   **Overall Maximum Remuneration** The total managerial remuneration payable by a public company to its directors (including managing and whole-time directors) and its manager for any financial year shall not exceed eleven percent of the company's net profits for that financial year, computed as per Section 198, with the exception that directors' remuneration is not deducted from gross profits [sec-197].\n*   **Exclusion of Fees** The aforesaid percentages are exclusive of any fees payable to directors under sub-section (5) [sec-197-ss-2].\n*   **Absence or Inadequacy of Profits** If a company has no profits or inadequate profits in a financial year, it shall not pay remuneration (exclusive of fees under sub-section (5)) to its directors (including managing, whole-time, manager, or non-executive directors like independent directors) except in accordance with Schedule V [sec-197-ss-3].\n*   **Determination of Remuneration** Remuneration payable to directors (including managing, whole-time, or manager) is determined by the company's articles, a resolution, or a special resolution passed in a general meeting, in accordance with this section [sec-197-ss-4]. This remuneration includes payment for services rendered in any other capacity, provided such services are professional and deemed so by the Nomination and Remuneration Committee (if applicable under Section 178(1)) or the Board [sec-197-ss-4].\n*   **Meeting Fees** A director may receive remuneration as a fee for attending Board or Committee meetings or for any other purpose decided by the Board, provided such fees do not exceed prescribed amounts [sec-197-ss-5]. Different fees may be prescribed for different classes of companies and for independent directors [sec-197-ss-5].\n*   **Mode of Payment** Remuneration to a director or manager may be paid monthly, as a specified percentage of net profits, or partly by both methods [sec-197-ss-6].\n*   **Net Profits Computation** Net profits for the purposes of this section are computed in the manner referred to in Section 198 [sec-197-ss-8].\n*   **Refund of Excess Remuneration** Any director who draws or receives remuneration exceeding the prescribed limit or without required approval must refund such sums to the company within two years or a lesser period allowed by the company, holding it in trust until refunded [sec-197-ss-9].\n*   **Waiver of Recovery** The company cannot waive the recovery of any sum refundable under sub-section (9) unless approved by a special resolution within two years from the date the sum became refundable [sec-197-ss-10].\n*   **Effect of Schedule V** In cases where Schedule V applies due to no profits or inadequate profits, any provision increasing director remuneration in the company's memorandum, articles, agreement, or resolution will be ineffective unless it complies with Schedule V conditions [sec-197-ss-11].\n*   **Disclosure by Listed Companies** Every listed company must disclose in its Board's report the ratio of each director's remuneration to the median employee's remuneration and other prescribed details [sec-197-ss-12].\n*   **Insurance Premiums** Premiums paid by a company for insurance taken on behalf of its managing director, whole-time director, manager, CEO, CFO, or Company Secretary to indemnify them against liability for negligence, default, misfeasance, breach of duty, or trust related to the company, shall not be treated as part of their remuneration [sec-197-ss-13].\n*   **Remuneration from Holding/Subsidiary Company** A director receiving commission from the company, who is also a managing or whole-time director, is not disqualified from receiving remuneration or commission from a holding or subsidiary company, subject to disclosure in the Board's report [sec-197-ss-14].\n*   **Penalties for Non-Compliance** Default in complying with this section incurs a penalty of one lakh rupees for the person and five lakh rupees for the company [sec-197-ss-15].\n*   **Auditor's Report** The company's auditor must state in their report under Section 143 whether remuneration paid to directors complies with this section, whether any remuneration exceeds the limit, and provide other prescribed details [sec-197-ss-16].\n*   **Abatement of Pending Applications** From the commencement of the Companies (Amendment) Act, 2017, pending applications to the Central Government under the previous provisions of this section abate, and the company must obtain approval in accordance with the amended provisions within one year [sec-197-ss-17].",
+    "cypher": "MATCH (s:Section {number: 197})\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(sc)\nWITH s, ss, cl, sc\nORDER BY ss.number, cl.label, sc.label\nRETURN\n  s.uid,\n  s.title,\n  s.text,\n  collect(DISTINCT {\n    uid: ss.uid,\n    number: ss.number,\n    text: ss.text\n  }) AS subsections,\n  collect(DISTINCT {\n    uid: cl.uid,\n    label: cl.label,\n    text: cl.text,\n    parent_subsection_uid: ss.uid\n  }) AS clauses,\n  collect(DISTINCT {\n    uid: sc.uid,\n    label: sc.label,\n    text: sc.text,\n    parent_clause_uid: cl.uid\n  }) AS subclauses",
+    "sources": [
+      {
+        "uid": "sec-197",
+        "type": "Section",
+        "text_excerpt": "197. Overall maximum managerial remuneration and managerial remuneration in case of absence or inadequacy of profits.--(1) The total managerial remuneration payable by a public company, to its directo"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-197",
+        "uid": "sec-197",
+        "type": "Section",
+        "text_excerpt": "197. Overall maximum managerial remuneration and managerial remuneration in case of absence or inadequacy of profits.--(1) The total managerial remuneration payable by a public company, to its directo",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 2,
+      "latency_ms": 30897.27,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 197
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 30.897305965423584
+  },
+  "SE-023": {
+    "question": "What is Section 1 about?",
+    "category": "structured_explanation",
+    "answer": "Section 1, titled \"PART III- GENERAL INSTRUCTIONS FOR THE PREPARATION OF CONSOLIDATED FINANCIAL STATEMENTS,\" provides general instructions for preparing consolidated financial statements [sec-1]. It mandates that a company required to prepare Consolidated Financial Statements, including a consolidated balance sheet, consolidated statement of changes in equity, and consolidated statement of profit and loss, must mutatis mutandis follow the requirements of this Schedule applicable to a company in the preparation of its individual financial statements [sec-1]. Additionally, the consolidated financial statements must disclose information as per the requirements specified in the applicable Indian Accounting Standards notified under the Companies (Indian Accounting Standards) Rules 2015, including specific details [sec-1].",
+    "cypher": "MATCH (s:Section {number: 1}) RETURN s.uid, s.title, s.text LIMIT 25",
+    "sources": [
+      {
+        "uid": "sec-1",
+        "type": "Section",
+        "text_excerpt": "1. Where a company is required to prepare Consolidated Financial Statements, i.e., consolidated balance sheet, consolidated statement of changes in equity and consolidated statement of profit and loss"
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-1",
+        "uid": "sec-1",
+        "type": "Section",
+        "text_excerpt": "1. Where a company is required to prepare Consolidated Financial Statements, i.e., consolidated balance sheet, consolidated statement of changes in equity and consolidated statement of profit and loss",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 1,
+      "latency_ms": 3839.25,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 1
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 3.8392629623413086
+  },
+  "SE-024": {
+    "question": "Explain Section 241 on application to Tribunal",
+    "category": "structured_explanation",
+    "answer": "Section 241 addresses applications to the Tribunal for relief. Specifically, it concerns cases involving oppression, among other matters [sec-241].",
+    "cypher": "MATCH (s:Section {number: 241}) RETURN s.uid, s.title, s.text LIMIT 25",
+    "sources": [
+      {
+        "uid": "sec-241",
+        "type": "Section",
+        "text_excerpt": "241. Application to Tribunal for relief in cases of oppression, etc."
+      }
+    ],
+    "citations": [
+      {
+        "marker": "sec-241",
+        "uid": "sec-241",
+        "type": "Section",
+        "text_excerpt": "241. Application to Tribunal for relief in cases of oppression, etc.",
+        "index": 1
+      }
+    ],
+    "metadata": {
+      "intent": "structured_lookup",
+      "retry_count": 1,
+      "latency_ms": 3711.99,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 241
+    },
+    "status": "PASS",
+    "has_citations": true,
+    "fallback_used": false,
+    "elapsed_seconds": 3.7120180130004883
+  },
+  "SE-025": {
+    "question": "What are the cross-references in Section 135?",
+    "category": "structured_explanation",
+    "answer": "Based on the provided graph results, no cross-reference information (relationships to target sections) was found for Section 135 or its sub-provisions.",
+    "cypher": "MATCH (s:Section {number: 135})\nWITH s\nOPTIONAL MATCH (s)-[:HAS_SUBSECTION]->(ss:SubSection)\nOPTIONAL MATCH (ss)-[:HAS_CLAUSE]->(cl:Clause)\nOPTIONAL MATCH (cl)-[:HAS_SUBCLAUSE]->(scl:SubClause)\nOPTIONAL MATCH (s)-[:HAS_PROVISO]->(p_s:Proviso)\nOPTIONAL MATCH (ss)-[:HAS_PROVISO]->(p_ss:Proviso)\nOPTIONAL MATCH (cl)-[:HAS_PROVISO]->(p_cl:Proviso)\nOPTIONAL MATCH (s)-[:HAS_EXPLANATION]->(e_s:Explanation)\nOPTIONAL MATCH (ss)-[:HAS_EXPLANATION]->(e_ss:Explanation)\nOPTIONAL MATCH (cl)-[:HAS_EXPLANATION]->(e_cl:Explanation)\n\nWITH s, collect(s) +\n     collect(ss) +\n     collect(cl) +\n     collect(scl) +\n     collect(p_s) +\n     collect(p_ss) +\n     collect(p_cl) +\n     collect(e_s) +\n     collect(e_ss) +\n     collect(e_cl) AS potential_sources\nUNWIND potential_sources AS source_node\nWITH DISTINCT source_node WHERE source_node IS NOT NULL\nOPTIONAL MATCH (source_node)-[r:REFERS_TO|SUBJECT_TO|NOTWITHSTANDING|PRESCRIBES_FOR]->(target:Section)\nWHERE target IS NOT NULL\nRETURN\n    source_node.uid AS source_uid,\n    labels(source_node)[0] AS source_type,\n    CASE\n        WHEN source_node:Section THEN toString(source_node.number)\n        WHEN source_node:SubSection THEN toString(source_node.number)\n        WHEN source_node:Clause THEN source_node.label\n        WHEN source_node:SubClause THEN source_node.label\n        WHEN source_node:Proviso THEN 'Proviso'\n        WHEN source_node:Explanation THEN 'Explanation'\n        ELSE NULL\n    END AS source_identifier,\n    type(r) AS relationship_type,\n    target.uid AS target_uid,\n    target.number AS target_section_number,\n    target.title AS target_section_title\nORDER BY source_type, source_identifier, relationship_type\nLIMIT 50",
+    "sources": [],
+    "citations": [],
+    "metadata": {
+      "intent": "cross_reference",
+      "retry_count": 2,
+      "latency_ms": 24593.72,
+      "source_type": "cypher",
+      "fallback_used": false
+    },
+    "verify": {
+      "section": 135
+    },
+    "status": "PASS",
+    "has_citations": false,
+    "fallback_used": false,
+    "elapsed_seconds": 24.59375524520874
+  }
+}

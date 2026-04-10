@@ -296,7 +296,11 @@ def parse_companies_act(
                     current_chapter.title = content
                 else:
                     # Mixed-case or already have sections — treat as marginal note
-                    pending_marginal_note = content
+                    # Guard: don't use Schedule/Part headings as section titles
+                    if content.upper().startswith(("PART ", "SCHEDULE ", "ANNEXURE ")):
+                        logger.debug("Ignoring Schedule/Part heading as marginal note: %s", content[:80])
+                    else:
+                        pending_marginal_note = content
 
         # ------------------------------------------------------------------
         # Paragraph/caption dispatch

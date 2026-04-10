@@ -79,8 +79,6 @@ MANUAL_RULE_SECTION_MAP: dict[str, list[str]] = {
     "rule-5": ["sec-177"],    # Audit committee
     "rule-6": ["sec-178"],    # Nomination and remuneration committee
     "rule-3": ["sec-149"],    # Appointment of independent directors
-    "rule-10": ["sec-185"],   # Loans to directors
-    "rule-11": ["sec-186"],   # Loans and investments by company
     "rule-12": ["sec-188"],   # Related party transactions
     "rule-7": ["sec-134"],    # Board's report
 }
